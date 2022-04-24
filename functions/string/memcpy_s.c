@@ -35,7 +35,7 @@ runtime_constraint_violation:
 
     if ( s1 != NULL && s1max <= RSIZE_MAX )
     {
-        memset( s1, 0, s1max );
+        memset_( s1, 0, s1max );
     }
 
     _PDCLIB_constraint_handler( _PDCLIB_CONSTRAINT_VIOLATION( _PDCLIB_EINVAL ) );
@@ -75,7 +75,7 @@ int main( void )
     s[5] = 'x';
 
     TESTCASE( memcpy_s( s, 5, abcde, 6 ) != 0 );
-    TESTCASE( memcmp( s, "\0\0\0\0\0x", 6 ) == 0 );
+    TESTCASE( memcmp_( s, "\0\0\0\0\0x", 6 ) == 0 );
 
     TESTCASE( memcpy_s( s, 3, s + 2, 3 ) != 0 );
     TESTCASE( memcpy_s( s + 2, 3, s, 3 ) != 0 );

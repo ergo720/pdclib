@@ -52,7 +52,7 @@ static void scrub_abbrs( struct state * sp )
         const struct ttinfo * const ttisp = &sp->ttis[ i ];
         char * cp = &sp->chars[ ttisp->desigidx ];
 
-        if ( strlen( cp ) > TZ_ABBR_MAX_LEN && strcmp( cp, GRANDPARENTED ) != 0 )
+        if ( strlen_( cp ) > TZ_ABBR_MAX_LEN && strcmp_( cp, GRANDPARENTED ) != 0 )
         {
             *( cp + TZ_ABBR_MAX_LEN ) = '\0';
         }
@@ -73,7 +73,7 @@ static int zoneinit( struct state * sp, char const * name )
         sp->charcnt = 0;
         sp->goback = sp->goahead = false;
         _PDCLIB_init_ttinfo( &sp->ttis[ 0 ], 0, false, 0 );
-        strcpy( sp->chars, gmt );
+        strcpy_( sp->chars, gmt );
         sp->defaulttype = 0;
         return 0;
     }
@@ -137,11 +137,11 @@ static void settzname( void )
 static void tzsetlcl( char const * name )
 {
     struct state * sp = &_PDCLIB_lclmem;
-    int lcl = name ? strlen( name ) < sizeof lcl_TZname : -1;
+    int lcl = name ? strlen_( name ) < sizeof lcl_TZname : -1;
 
     if ( lcl < 0
             ? lcl_is_set < 0
-            : 0 < lcl_is_set && strcmp( lcl_TZname, name ) == 0 )
+            : 0 < lcl_is_set && strcmp_( lcl_TZname, name ) == 0 )
     {
         return;
     }
@@ -155,7 +155,7 @@ static void tzsetlcl( char const * name )
 
         if ( 0 < lcl )
         {
-            strcpy( lcl_TZname, name );
+            strcpy_( lcl_TZname, name );
         }
     }
 

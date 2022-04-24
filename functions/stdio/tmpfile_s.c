@@ -60,7 +60,7 @@ int main( void )
     TESTCASE( ( tmpfile_s( &fh ) ) == 0 );
     TESTCASE( fputc( 'x', fh ) == 'x' );
     /* Checking that file is actually there */
-    TESTCASE_NOREG( strcpy( filename, fh->filename ) == filename );
+    TESTCASE_NOREG( strcpy_( filename, fh->filename ) == filename );
     TESTCASE_NOREG( ( fhtest = fopen( filename, "r" ) ) != NULL );
     TESTCASE_NOREG( fclose( fhtest ) == 0 );
     /* Closing tmpfile */

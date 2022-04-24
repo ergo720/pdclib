@@ -14,7 +14,7 @@
 
 _PDCLIB_bigint_t * _PDCLIB_bigint_mant( _PDCLIB_bigint_t * bigint, unsigned char const * mant, size_t mant_dig )
 {
-    div_t mant_byte = div( mant_dig - 1, _PDCLIB_CHAR_BIT );
+    div_t mant_byte = div_( mant_dig - 1, _PDCLIB_CHAR_BIT );
 
     size_t digit = 0;
     size_t offset = 0;

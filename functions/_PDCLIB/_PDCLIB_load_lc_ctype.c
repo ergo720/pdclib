@@ -20,15 +20,15 @@ struct _PDCLIB_lc_ctype_t * _PDCLIB_load_lc_ctype( const char * path, const char
 {
     struct _PDCLIB_lc_ctype_t * rc = NULL;
     const char * extension = "_ctype.dat";
-    char * file = (char *)malloc( strlen( path ) + strlen( locale ) + strlen( extension ) + 1 );
+    char * file = (char *)malloc( strlen_( path ) + strlen_( locale ) + strlen_( extension ) + 1 );
 
     if ( file )
     {
         FILE * fh;
 
-        strcpy( file, path );
-        strcat( file, locale );
-        strcat( file, extension );
+        strcpy_( file, path );
+        strcat_( file, locale );
+        strcat_( file, extension );
 
         if ( ( fh = fopen( file, "rb" ) ) != NULL )
         {

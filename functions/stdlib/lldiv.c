@@ -1,4 +1,4 @@
-/* lldiv( long long int, long long int )
+/* lldiv_( long long int, long long int )
 
    This file is part of the Public Domain C Library (PDCLib).
    Permission is granted to use, modify, and / or redistribute at will.
@@ -8,7 +8,7 @@
 
 #ifndef REGTEST
 
-lldiv_t lldiv( long long int numer, long long int denom )
+lldiv_t lldiv_( long long int numer, long long int denom )
 {
     lldiv_t rc;
     rc.quot = numer / denom;
@@ -26,11 +26,11 @@ lldiv_t lldiv( long long int numer, long long int denom )
 int main( void )
 {
     lldiv_t result;
-    result = lldiv( 5ll, 2ll );
+    result = lldiv_( 5ll, 2ll );
     TESTCASE( result.quot == 2 && result.rem == 1 );
-    result = lldiv( -5ll, 2ll );
+    result = lldiv_( -5ll, 2ll );
     TESTCASE( result.quot == -2 && result.rem == -1 );
-    result = lldiv( 5ll, -2ll );
+    result = lldiv_( 5ll, -2ll );
     TESTCASE( result.quot == -2 && result.rem == 1 );
     TESTCASE( sizeof( result.quot ) == sizeof( long long ) );
     TESTCASE( sizeof( result.rem )  == sizeof( long long ) );

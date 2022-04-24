@@ -24,6 +24,9 @@ typedef _PDCLIB_size_t size_t;
 #define NULL _PDCLIB_NULL
 #endif
 
+// NOTE: some functions have been renamed by appending an underscore. This is necessary to avoid a conflict with the homonymous intrinsic functions used by msvc.
+// For details, see here https://developercommunity.visualstudio.com/t/cant-suppress-compiler-intrinsic-function-calls-wh/865266
+
 /* Numeric conversion functions */
 
 /* TODO: atof(), strtof(), strtod(), strtold() */
@@ -115,7 +118,7 @@ _PDCLIB_PUBLIC void free( void * ptr );
 /* Resize a chunk of memory previously allocated with malloc() and pointed to
    by ptr to the given size (which might be larger or smaller than the original
    size). Returns a pointer to the reallocated memory, or NULL if the request
-   could not be satisfied. Note that the resizing might include a memcpy()
+   could not be satisfied. Note that the resizing might include a memcpy_()
    from the original location to a different one, so the return value might or
    might not equal ptr. If size is larger than the original size, the value of
    memory beyond the original size is undefined. If ptr is NULL, realloc()
@@ -141,7 +144,7 @@ _PDCLIB_PUBLIC void * realloc( void * ptr, size_t size );
    temporary files before exiting with EXIT_FAILURE.
    abort() does not return.
 */
-_PDCLIB_PUBLIC _PDCLIB_Noreturn void abort( void ) _PDCLIB_NORETURN;
+_PDCLIB_PUBLIC _PDCLIB_Noreturn void abort( void );
 
 /* Register a function that will be called on quick_exit().
    At least 32 functions can be registered this way, and will be called in
@@ -163,7 +166,7 @@ _PDCLIB_PUBLIC int atexit( void ( *func )( void ) );
    and EXIT_FAILURE above.)
    exit() does not return.
 */
-_PDCLIB_PUBLIC _PDCLIB_Noreturn void exit( int status ) _PDCLIB_NORETURN;
+_PDCLIB_PUBLIC _PDCLIB_Noreturn void exit( int status );
 
 /* Normal process termination. Functions registered by at_quick_exit() (see
    above) are called, streams flushed, files closed and temporary files removed
@@ -171,7 +174,7 @@ _PDCLIB_PUBLIC _PDCLIB_Noreturn void exit( int status ) _PDCLIB_NORETURN;
    EXIT_SUCCESS and EXIT_FAILURE above.)
    quick_exit() does not return.
 */
-_PDCLIB_PUBLIC _PDCLIB_Noreturn void quick_exit( int status ) _PDCLIB_NORETURN;
+_PDCLIB_PUBLIC _PDCLIB_Noreturn void quick_exit( int status );
 
 /* Normal process termination. Functions registered by atexit()/at_quick_exit()
    (see above) are NOT CALLED. This implementation DOES flush streams, close
@@ -179,7 +182,7 @@ _PDCLIB_PUBLIC _PDCLIB_Noreturn void quick_exit( int status ) _PDCLIB_NORETURN;
    given status. (See comment for EXIT_SUCCESS and EXIT_FAILURE above.)
    _Exit() does not return.
 */
-_PDCLIB_PUBLIC _PDCLIB_Noreturn void _Exit( int status ) _PDCLIB_NORETURN;
+_PDCLIB_PUBLIC _PDCLIB_Noreturn void _Exit( int status );
 
 /* Search an environment-provided key-value map for the given key name, and
    return a pointer to the associated value string (or NULL if key name cannot
@@ -227,13 +230,13 @@ _PDCLIB_PUBLIC void qsort( void * base, size_t nmemb, size_t size, int ( *compar
    complement's notation (most modern CPUs), the largest negative value cannot
    be represented as positive value. In this case, behaviour is unspecified.
 */
-_PDCLIB_PUBLIC int abs( int j );
-_PDCLIB_PUBLIC long int labs( long int j );
-_PDCLIB_PUBLIC long long int llabs( long long int j );
+_PDCLIB_PUBLIC int abs_( int j );
+_PDCLIB_PUBLIC long int labs_( long int j );
+_PDCLIB_PUBLIC long long int llabs_( long long int j );
 
 /* These structures each have a member quot and a member rem, of type int (for
    div_t), long int (for ldiv_t) and long long it (for lldiv_t) respectively.
-   The order of the members is platform-defined to allow the div() functions
+   The order of the members is platform-defined to allow the div_() functions
    below to be implemented efficiently.
 */
 typedef struct _PDCLIB_div_t     div_t;
@@ -243,9 +246,9 @@ typedef struct _PDCLIB_lldiv_t lldiv_t;
 /* Return quotient (quot) and remainder (rem) of an integer division in one of
    the structs above.
 */
-_PDCLIB_PUBLIC div_t div( int numer, int denom );
-_PDCLIB_PUBLIC ldiv_t ldiv( long int numer, long int denom );
-_PDCLIB_PUBLIC lldiv_t lldiv( long long int numer, long long int denom );
+_PDCLIB_PUBLIC div_t div_( int numer, int denom );
+_PDCLIB_PUBLIC ldiv_t ldiv_( long int numer, long int denom );
+_PDCLIB_PUBLIC lldiv_t lldiv_( long long int numer, long long int denom );
 
 /* TODO: Multibyte / wide character conversion functions */
 

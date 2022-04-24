@@ -70,7 +70,7 @@ int main( void )
     TESTCASE( puts( message ) >= 0 );
     rewind( fh );
     TESTCASE( fread( buffer, 1, 22, fh ) == 22 );
-    TESTCASE( memcmp( buffer, message, 22 ) == 0 );
+    TESTCASE( memcmp_( buffer, message, 22 ) == 0 );
     TESTCASE( buffer[22] == 'x' );
     TESTCASE( fclose( fh ) == 0 );
     TESTCASE( remove( testfile ) == 0 );

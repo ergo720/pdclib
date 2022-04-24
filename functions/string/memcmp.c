@@ -1,4 +1,4 @@
-/* memcmp( const void *, const void *, size_t )
+/* memcmp_( const void *, const void *, size_t )
 
    This file is part of the Public Domain C Library (PDCLib).
    Permission is granted to use, modify, and / or redistribute at will.
@@ -8,7 +8,7 @@
 
 #ifndef REGTEST
 
-int memcmp( const void * s1, const void * s2, size_t n )
+int memcmp_( const void * s1, const void * s2, size_t n )
 {
     const unsigned char * p1 = ( const unsigned char * ) s1;
     const unsigned char * p2 = ( const unsigned char * ) s2;
@@ -36,10 +36,10 @@ int memcmp( const void * s1, const void * s2, size_t n )
 int main( void )
 {
     const char xxxxx[] = "xxxxx";
-    TESTCASE( memcmp( abcde, abcdx, 5 ) < 0 );
-    TESTCASE( memcmp( abcde, abcdx, 4 ) == 0 );
-    TESTCASE( memcmp( abcde, xxxxx, 0 ) == 0 );
-    TESTCASE( memcmp( xxxxx, abcde, 1 ) > 0 );
+    TESTCASE( memcmp_( abcde, abcdx, 5 ) < 0 );
+    TESTCASE( memcmp_( abcde, abcdx, 4 ) == 0 );
+    TESTCASE( memcmp_( abcde, xxxxx, 0 ) == 0 );
+    TESTCASE( memcmp_( xxxxx, abcde, 1 ) > 0 );
     return 0;
 }
 

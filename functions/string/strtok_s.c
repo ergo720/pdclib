@@ -45,8 +45,8 @@ int main( void )
     TESTCASE( s[7] == 'd' );
     TESTCASE( s[8] == '\0' );
     TESTCASE( _PDCLIB_strtok( NULL, &max, "_", &p ) == NULL );
-    strcpy( s, "ab_cd" );
-    max = strlen( s );
+    strcpy_( s, "ab_cd" );
+    max = strlen_( s );
     TESTCASE( _PDCLIB_strtok( s, &max, "_", &p ) == &s[0] );
     TESTCASE( s[0] == 'a' );
     TESTCASE( s[1] == 'b' );

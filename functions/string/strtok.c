@@ -21,7 +21,7 @@ char * strtok( char * _PDCLIB_restrict s1, const char * _PDCLIB_restrict s2 )
     {
         /* new string */
         tmp = s1;
-        max = strlen( tmp );
+        max = strlen_( tmp );
     }
 
     return _PDCLIB_strtok( s1, &max, s2, &tmp );
@@ -48,7 +48,7 @@ int main( void )
     TESTCASE( s[7] == 'd' );
     TESTCASE( s[8] == '\0' );
     TESTCASE( strtok( NULL, "_" ) == NULL );
-    strcpy( s, "ab_cd" );
+    strcpy_( s, "ab_cd" );
     TESTCASE( strtok( s, "_" ) == &s[0] );
     TESTCASE( s[0] == 'a' );
     TESTCASE( s[1] == 'b' );

@@ -70,9 +70,9 @@ int main( void )
     remove( "test_lines.txt" );
 
     TESTCASE( rc != NULL );
-    TESTCASE( strcmp( rc, "Foo" ) == 0 );
-    TESTCASE( strcmp( rc + 4, "" ) == 0 );
-    TESTCASE( strcmp( rc + 5, "Bar" ) == 0 );
+    TESTCASE( strcmp_( rc, "Foo" ) == 0 );
+    TESTCASE( strcmp_( rc + 4, "" ) == 0 );
+    TESTCASE( strcmp_( rc + 5, "Bar" ) == 0 );
 
 #endif
     return TEST_RESULTS;

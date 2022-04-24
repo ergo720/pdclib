@@ -19,7 +19,7 @@ errno_t memset_s( void * s, rsize_t smax, int c, rsize_t n )
     {
         if ( s != NULL && smax <= RSIZE_MAX )
         {
-            memset( s, c, smax );
+            memset_( s, c, smax );
         }
 
         _PDCLIB_constraint_handler( _PDCLIB_CONSTRAINT_VIOLATION( _PDCLIB_EINVAL ) );

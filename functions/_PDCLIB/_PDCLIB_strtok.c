@@ -126,7 +126,7 @@ int main( void )
 #ifndef REGTEST
     /* The original PDCLib strtok() test */
     char s[] = "_a_bc__d_";
-    rsize_t max = strlen( s );
+    rsize_t max = strlen_( s );
     char * p;
 
     TESTCASE( _PDCLIB_strtok( s, &max, "_", &p ) == &s[1] );
@@ -145,8 +145,8 @@ int main( void )
     TESTCASE( s[8] == '\0' );
     TESTCASE( _PDCLIB_strtok( NULL, &max, "_", &p ) == NULL );
     TESTCASE( max == 0 );
-    strcpy( s, "ab_cd" );
-    max = strlen( s );
+    strcpy_( s, "ab_cd" );
+    max = strlen_( s );
     TESTCASE( _PDCLIB_strtok( s, &max, "_", &p ) == &s[0] );
     TESTCASE( s[0] == 'a' );
     TESTCASE( s[1] == 'b' );
@@ -158,7 +158,7 @@ int main( void )
     TESTCASE( _PDCLIB_strtok( NULL, &max, "_", &p ) == NULL );
 
     /* Testing the constraint handling */
-    strcpy( s, "ab.cd" );
+    strcpy_( s, "ab.cd" );
     max = 2;
     TESTCASE( set_constraint_handler_s( test_handler ) == abort_handler_s );
     TESTCASE( _PDCLIB_strtok( s, &max, ".", &p ) == NULL );
@@ -168,8 +168,8 @@ int main( void )
         /* The strtok_s() example code from the standard */
         char str1[] = "?a???b,,,#c";
         char str2[] = "\t \t";
-        rsize_t max1 = strlen( str1 );
-        rsize_t max2 = strlen( str2 );
+        rsize_t max1 = strlen_( str1 );
+        rsize_t max2 = strlen_( str2 );
         char * ptr1;
         char * ptr2;
 

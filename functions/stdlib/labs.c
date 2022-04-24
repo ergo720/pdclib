@@ -1,4 +1,4 @@
-/* labs( long int )
+/* labs_( long int )
 
    This file is part of the Public Domain C Library (PDCLib).
    Permission is granted to use, modify, and / or redistribute at will.
@@ -8,7 +8,7 @@
 
 #ifndef REGTEST
 
-long int labs( long int j )
+long int labs_( long int j )
 {
     return ( j >= 0 ) ? j : -j;
 }
@@ -23,9 +23,9 @@ long int labs( long int j )
 
 int main( void )
 {
-    TESTCASE( labs( 0 ) == 0 );
-    TESTCASE( labs( LONG_MAX ) == LONG_MAX );
-    TESTCASE( labs( LONG_MIN + 1 ) == -( LONG_MIN + 1 ) );
+    TESTCASE( labs_( 0 ) == 0 );
+    TESTCASE( labs_( LONG_MAX ) == LONG_MAX );
+    TESTCASE( labs_( LONG_MIN + 1 ) == -( LONG_MIN + 1 ) );
     return TEST_RESULTS;
 }
 

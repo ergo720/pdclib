@@ -1,4 +1,4 @@
-/* abs( int )
+/* abs_( int )
 
    This file is part of the Public Domain C Library (PDCLib).
    Permission is granted to use, modify, and / or redistribute at will.
@@ -8,7 +8,7 @@
 
 #ifndef REGTEST
 
-int abs( int j )
+int abs_( int j )
 {
     return ( j >= 0 ) ? j : -j;
 }
@@ -23,9 +23,9 @@ int abs( int j )
 
 int main( void )
 {
-    TESTCASE( abs( 0 ) == 0 );
-    TESTCASE( abs( INT_MAX ) == INT_MAX );
-    TESTCASE( abs( INT_MIN + 1 ) == -( INT_MIN + 1 ) );
+    TESTCASE( abs_( 0 ) == 0 );
+    TESTCASE( abs_( INT_MAX ) == INT_MAX );
+    TESTCASE( abs_( INT_MIN + 1 ) == -( INT_MIN + 1 ) );
     return TEST_RESULTS;
 }
 

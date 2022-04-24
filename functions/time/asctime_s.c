@@ -52,11 +52,11 @@ int main( void )
 
     struct tm time;
     MKTIME( time, 52, 3, 1, 16, 8, 73, 0, 0 );
-    TESTCASE( strcmp( asctime( &time ), "Sun Sep 16 01:03:52 1973\n" ) == 0 );
+    TESTCASE( strcmp_( asctime( &time ), "Sun Sep 16 01:03:52 1973\n" ) == 0 );
     MKTIME( time, 0, 0, 0, 1, 0, 0, 0, 0 );
-    TESTCASE( strcmp( asctime( &time ), "Sun Jan  1 00:00:00 1900\n" ) == 0 );
+    TESTCASE( strcmp_( asctime( &time ), "Sun Jan  1 00:00:00 1900\n" ) == 0 );
     MKTIME( time, 60, 59, 23, 31, 11, 8099, 6, 0 );
-    TESTCASE( strcmp( asctime( &time ), "Sat Dec 31 23:59:60 9999\n" ) == 0 );
+    TESTCASE( strcmp_( asctime( &time ), "Sat Dec 31 23:59:60 9999\n" ) == 0 );
     return TEST_RESULTS;
 }
 

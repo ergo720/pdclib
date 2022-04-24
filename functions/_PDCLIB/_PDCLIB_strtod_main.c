@@ -19,6 +19,7 @@
 */
 static double _PDCLIB_strtod_main( const char * nptr, char ** endptr )
 {
+#if 0
     double value = 0.0;
     int base = 0;
     char sign = '+';
@@ -114,6 +115,7 @@ static double _PDCLIB_strtod_main( const char * nptr, char ** endptr )
                 return 0.0;
             }
     }
+#endif
 }
 
 #endif

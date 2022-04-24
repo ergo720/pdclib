@@ -1,4 +1,4 @@
-/* strcpy( char *, const char * )
+/* strcpy_( char *, const char * )
 
    This file is part of the Public Domain C Library (PDCLib).
    Permission is granted to use, modify, and / or redistribute at will.
@@ -8,7 +8,7 @@
 
 #ifndef REGTEST
 
-char * strcpy( char * _PDCLIB_restrict s1, const char * _PDCLIB_restrict s2 )
+char * strcpy_( char * _PDCLIB_restrict s1, const char * _PDCLIB_restrict s2 )
 {
     char * rc = s1;
 
@@ -29,10 +29,10 @@ char * strcpy( char * _PDCLIB_restrict s1, const char * _PDCLIB_restrict s2 )
 int main( void )
 {
     char s[] = "xxxxx";
-    TESTCASE( strcpy( s, "" ) == s );
+    TESTCASE( strcpy_( s, "" ) == s );
     TESTCASE( s[0] == '\0' );
     TESTCASE( s[1] == 'x' );
-    TESTCASE( strcpy( s, abcde ) == s );
+    TESTCASE( strcpy_( s, abcde ) == s );
     TESTCASE( s[0] == 'a' );
     TESTCASE( s[4] == 'e' );
     TESTCASE( s[5] == '\0' );

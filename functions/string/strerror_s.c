@@ -26,7 +26,7 @@ errno_t strerror_s( char * s, rsize_t maxsize, errno_t errnum )
 
     if ( len < maxsize )
     {
-        strcpy( s, strerror( errnum ) );
+        strcpy_( s, strerror( errnum ) );
     }
     else
     {
@@ -34,7 +34,7 @@ errno_t strerror_s( char * s, rsize_t maxsize, errno_t errnum )
 
         if ( maxsize > 3 )
         {
-            strcpy( &s[ maxsize - 4 ], "..." );
+            strcpy_( &s[ maxsize - 4 ], "..." );
         }
         else
         {
@@ -59,9 +59,9 @@ int main( void )
 #if ! defined( REGTEST ) || defined( __STDC_LIB_EXT1__ )
     char s[14];
     TESTCASE( strerror_s( s, 14, _PDCLIB_ERRNO_MAX ) == 0 );
-    TESTCASE( strcmp( s, "unknown error" ) == 0 );
+    TESTCASE( strcmp_( s, "unknown error" ) == 0 );
     TESTCASE( strerror_s( s, 13, _PDCLIB_ERRNO_MAX ) == 0 );
-    TESTCASE( strcmp( s, "unknown e..." ) == 0 );
+    TESTCASE( strcmp_( s, "unknown e..." ) == 0 );
 #endif
     return TEST_RESULTS;
 }

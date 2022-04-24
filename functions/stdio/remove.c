@@ -8,12 +8,14 @@
 */
 
 #include <stdio.h>
+#include <assert.h>
+
 
 #ifndef REGTEST
 
 #include <string.h>
 
-#include "/usr/include/errno.h"
+//#include "/usr/include/errno.h"
 
 extern struct _PDCLIB_file_t * _PDCLIB_filelist;
 
@@ -29,12 +31,15 @@ extern int unlink( const char * pathname );
 
 int remove( const char * pathname )
 {
+    _PDCLIB_assert89(__func__);
+    return EOF;
+#if 0
     int rc;
     struct _PDCLIB_file_t * current = _PDCLIB_filelist;
 
     while ( current != NULL )
     {
-        if ( ( current->filename != NULL ) && ( strcmp( current->filename, pathname ) == 0 ) )
+        if ( ( current->filename != NULL ) && ( strcmp_( current->filename, pathname ) == 0 ) )
         {
             return EOF;
         }
@@ -49,6 +54,7 @@ int remove( const char * pathname )
     }
 
     return rc;
+#endif
 }
 
 #endif

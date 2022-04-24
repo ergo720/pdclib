@@ -1,4 +1,4 @@
-/* strlen( const char * )
+/* strlen_( const char * )
 
    This file is part of the Public Domain C Library (PDCLib).
    Permission is granted to use, modify, and / or redistribute at will.
@@ -8,7 +8,7 @@
 
 #ifndef REGTEST
 
-size_t strlen( const char * s )
+size_t strlen_( const char * s )
 {
     size_t rc = 0;
 
@@ -28,8 +28,8 @@ size_t strlen( const char * s )
 
 int main( void )
 {
-    TESTCASE( strlen( abcde ) == 5 );
-    TESTCASE( strlen( "" ) == 0 );
+    TESTCASE( strlen_( abcde ) == 5 );
+    TESTCASE( strlen_( "" ) == 0 );
     return TEST_RESULTS;
 }
 

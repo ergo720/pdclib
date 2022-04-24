@@ -57,12 +57,12 @@ int main( void )
 {
     FILE * fh;
     TESTCASE( ( fh = tmpfile() ) != NULL );
-    TESTCASE( fwrite( teststring, 1, strlen( teststring ), fh ) == strlen( teststring ) );
+    TESTCASE( fwrite( teststring, 1, strlen_( teststring ), fh ) == strlen_( teststring ) );
     /* General functionality */
     TESTCASE( fseek( fh, -1, SEEK_END ) == 0 );
-    TESTCASE( ( size_t )ftell( fh ) == strlen( teststring ) - 1 );
+    TESTCASE( ( size_t )ftell( fh ) == strlen_( teststring ) - 1 );
     TESTCASE( fseek( fh, 0, SEEK_END ) == 0 );
-    TESTCASE( ( size_t )ftell( fh ) == strlen( teststring ) );
+    TESTCASE( ( size_t )ftell( fh ) == strlen_( teststring ) );
     TESTCASE( fseek( fh, 0, SEEK_SET ) == 0 );
     TESTCASE( ftell( fh ) == 0 );
     TESTCASE( fseek( fh, 5, SEEK_CUR ) == 0 );

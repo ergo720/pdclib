@@ -23,9 +23,9 @@ int main( void )
 {
     struct lconv * lconv;
     TESTCASE( ( lconv = localeconv() ) != NULL );
-    TESTCASE( strcmp( lconv->decimal_point, "." ) == 0 );
-    TESTCASE( strcmp( lconv->thousands_sep, "" ) == 0 );
-    TESTCASE( ( strcmp( lconv->grouping, "" ) == 0 ) || ( strcmp( lconv->grouping, "\x7f" ) == 0 ) );
+    TESTCASE( strcmp_( lconv->decimal_point, "." ) == 0 );
+    TESTCASE( strcmp_( lconv->thousands_sep, "" ) == 0 );
+    TESTCASE( ( strcmp_( lconv->grouping, "" ) == 0 ) || ( strcmp_( lconv->grouping, "\x7f" ) == 0 ) );
     return TEST_RESULTS;
 }
 

@@ -71,12 +71,12 @@ int main( void )
     TESTCASE( ungetc( 'z', fh ) == 'z' );
     TESTCASE( ftell( fh ) == -1 );
     TESTCASE( fread( input, 1, 4, fh ) == 4 );
-    TESTCASE( memcmp( input, "z123", 4 ) == 0 );
+    TESTCASE( memcmp_( input, "z123", 4 ) == 0 );
     rewind( fh );
     TESTCASE( ungetc( 'z', fh ) == 'z' );
     TESTCASE( ftell( fh ) == -1 );
     TESTCASE( fscanf( fh, "%4c", input ) == 1 );
-    TESTCASE( memcmp( input, "z123", 4 ) == 0 );
+    TESTCASE( memcmp_( input, "z123", 4 ) == 0 );
     rewind( fh );
     TESTCASE( fgetc( fh ) == '1' );
     TESTCASE( ftell( fh ) == 1 );

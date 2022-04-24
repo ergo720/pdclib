@@ -17,15 +17,15 @@ struct _PDCLIB_lc_lconv_numeric_t * _PDCLIB_load_lc_numeric( const char * path, 
 {
     struct _PDCLIB_lc_lconv_numeric_t * rc = NULL;
     const char * extension = "_numeric.dat";
-    char * file = (char *)malloc( strlen( path ) + strlen( locale ) + strlen( extension ) + 1 );
+    char * file = (char *)malloc( strlen_( path ) + strlen_( locale ) + strlen_( extension ) + 1 );
 
     if ( file )
     {
         FILE * fh;
 
-        strcpy( file, path );
-        strcat( file, locale );
-        strcat( file, extension );
+        strcpy_( file, path );
+        strcat_( file, locale );
+        strcat_( file, extension );
 
         if ( ( fh = fopen( file, "rb" ) ) != NULL )
         {
@@ -36,9 +36,9 @@ struct _PDCLIB_lc_lconv_numeric_t * _PDCLIB_load_lc_numeric( const char * path, 
                 if ( data != NULL )
                 {
                     rc->decimal_point = data;
-                    data += strlen( data ) + 1;
+                    data += strlen_( data ) + 1;
                     rc->thousands_sep = data;
-                    data += strlen( data ) + 1;
+                    data += strlen_( data ) + 1;
                     rc->grouping = data;
                 }
                 else
@@ -73,9 +73,9 @@ int main( void )
     fclose( fh );
     TESTCASE( ( lc = _PDCLIB_load_lc_numeric( "./", "test" ) ) );
     remove( "test_numeric.dat" );
-    TESTCASE( strcmp( lc->decimal_point, "," ) == 0 );
-    TESTCASE( strcmp( lc->thousands_sep, "." ) == 0 );
-    TESTCASE( strcmp( lc->grouping, "" ) == 0 );
+    TESTCASE( strcmp_( lc->decimal_point, "," ) == 0 );
+    TESTCASE( strcmp_( lc->thousands_sep, "." ) == 0 );
+    TESTCASE( strcmp_( lc->grouping, "" ) == 0 );
 #endif
 
     return TEST_RESULTS;

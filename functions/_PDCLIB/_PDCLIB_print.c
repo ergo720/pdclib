@@ -83,7 +83,7 @@ const char * _PDCLIB_print( const char * spec, struct _PDCLIB_status_t * status 
         if ( width < 0 )
         {
             status->flags |= E_minus;
-            status->width = abs( width );
+            status->width = abs_( width );
         }
         else
         {
@@ -321,7 +321,7 @@ const char * _PDCLIB_print( const char * spec, struct _PDCLIB_status_t * status 
             {
                 /* Integer conversions (unsigned) */
                 uintmax_t value;
-                imaxdiv_t div;
+                imaxdiv_t div_;
 
                 switch ( status->flags & ( E_char | E_short | E_long | E_llong | E_size | E_pointer | E_intmax ) )
                 {
@@ -362,9 +362,9 @@ const char * _PDCLIB_print( const char * spec, struct _PDCLIB_status_t * status 
                         return NULL;
                 }
 
-                div.quot = value / status->base;
-                div.rem = value % status->base;
-                _PDCLIB_print_integer( div, status );
+                div_.quot = value / status->base;
+                div_.rem = value % status->base;
+                _PDCLIB_print_integer( div_, status );
             }
             else
             {
@@ -453,7 +453,7 @@ static int testprintf( char * buffer, const char * format, ... )
     status.prec = EOF;
     status.stream = NULL;
     va_start( status.arg, format );
-    memset( buffer, '\0', 100 );
+    memset_( buffer, '\0', 100 );
 
     if ( *( _PDCLIB_print( format, &status ) ) != '\0' )
     {

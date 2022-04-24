@@ -611,7 +611,7 @@ const char * _PDCLIB_scan( const char * spec, struct _PDCLIB_status_t * status )
                     }
                     else
                     {
-                        char * digitptr = (char *)memchr( _PDCLIB_digits, tolower( rc ), status->base );
+                        char * digitptr = (char *)memchr_( _PDCLIB_digits, tolower( rc ), status->base );
 
                         if ( digitptr == NULL )
                         {

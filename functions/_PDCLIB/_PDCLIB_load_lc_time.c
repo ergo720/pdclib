@@ -18,15 +18,15 @@ struct _PDCLIB_lc_time_t * _PDCLIB_load_lc_time( const char * path, const char *
 {
     struct _PDCLIB_lc_time_t * rc = NULL;
     const char * extension = "_time.dat";
-    char * file = (char *)malloc( strlen( path ) + strlen( locale ) + strlen( extension ) + 1 );
+    char * file = (char *)malloc( strlen_( path ) + strlen_( locale ) + strlen_( extension ) + 1 );
 
     if ( file )
     {
         FILE * fh;
 
-        strcpy( file, path );
-        strcat( file, locale );
-        strcat( file, extension );
+        strcpy_( file, path );
+        strcat_( file, locale );
+        strcat_( file, extension );
 
         if ( ( fh = fopen( file, "rb" ) ) != NULL )
         {
@@ -41,25 +41,25 @@ struct _PDCLIB_lc_time_t * _PDCLIB_load_lc_time( const char * path, const char *
                     for ( i = 0; i < 12; ++i )
                     {
                         rc->month_name_abbr[ i ] = data;
-                        data += strlen( data ) + 1;
+                        data += strlen_( data ) + 1;
                     }
 
                     for ( i = 0; i < 12; ++i )
                     {
                         rc->month_name_full[ i ] = data;
-                        data += strlen( data ) + 1;
+                        data += strlen_( data ) + 1;
                     }
 
                     for ( i = 0; i < 7; ++i )
                     {
                         rc->day_name_abbr[ i ] = data;
-                        data += strlen( data ) + 1;
+                        data += strlen_( data ) + 1;
                     }
 
                     for ( i = 0; i < 7; ++i )
                     {
                         rc->day_name_full[ i ] = data;
-                        data += strlen( data ) + 1;
+                        data += strlen_( data ) + 1;
                     }
 
                     rc->alloced = 1;
@@ -148,14 +148,14 @@ int main( void )
     TESTCASE( ( lc = _PDCLIB_load_lc_time( "./", "test" ) ) );
     remove( "test_time.dat" );
 
-    TESTCASE( strcmp( lc->month_name_abbr[ 0 ], "Jan" ) == 0 );
-    TESTCASE( strcmp( lc->month_name_abbr[ 11 ], "Dez" ) == 0 );
-    TESTCASE( strcmp( lc->month_name_full[ 0 ], "Januar" ) == 0 );
-    TESTCASE( strcmp( lc->month_name_full[ 11 ], "Dezember" ) == 0 );
-    TESTCASE( strcmp( lc->day_name_abbr[ 0 ], "So" ) == 0 );
-    TESTCASE( strcmp( lc->day_name_abbr[ 6 ], "Sa" ) == 0 );
-    TESTCASE( strcmp( lc->day_name_full[ 0 ], "Sonntag" ) == 0 );
-    TESTCASE( strcmp( lc->day_name_full[ 6 ], "Samstag" ) == 0 );
+    TESTCASE( strcmp_( lc->month_name_abbr[ 0 ], "Jan" ) == 0 );
+    TESTCASE( strcmp_( lc->month_name_abbr[ 11 ], "Dez" ) == 0 );
+    TESTCASE( strcmp_( lc->month_name_full[ 0 ], "Januar" ) == 0 );
+    TESTCASE( strcmp_( lc->month_name_full[ 11 ], "Dezember" ) == 0 );
+    TESTCASE( strcmp_( lc->day_name_abbr[ 0 ], "So" ) == 0 );
+    TESTCASE( strcmp_( lc->day_name_abbr[ 6 ], "Sa" ) == 0 );
+    TESTCASE( strcmp_( lc->day_name_full[ 0 ], "Sonntag" ) == 0 );
+    TESTCASE( strcmp_( lc->day_name_full[ 6 ], "Samstag" ) == 0 );
 
 #endif
 

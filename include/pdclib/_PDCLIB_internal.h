@@ -24,8 +24,16 @@ extern "C" {
 
 /* Many a compiler gets this wrong, so you might have to hardcode it instead. */
 
+#if _MSC_VER
+// NOTE: Apparently, in msvc __STDC__ is not defined even when using /Za. According to https://developercommunity.visualstudio.com/t/option-zcpreprocessor-does-not-change-the-value-of/1568776#T-N1584665,
+// we need to check the new macro _MSVC_TRADITIONAL instead
+#if !defined(_MSVC_TRADITIONAL) || _MSVC_TRADITIONAL
+#error Compiler does not define _ _STDC_ _ to 1 (not standard-compliant)!
+#endif
+#else
 #if __STDC__ != 1
 #error Compiler does not define _ _STDC_ _ to 1 (not standard-compliant)!
+#endif
 #endif
 
 #ifndef __STDC_HOSTED__
@@ -751,6 +759,10 @@ _PDCLIB_LOCAL int _PDCLIB_long_double_split( long double value, unsigned * expon
 /* Sanity checks                                                              */
 /* -------------------------------------------------------------------------- */
 
+#if _MSC_VER
+#pragma warning(disable:4804) // suppress msvc warning related to unsafe bool operations
+#endif
+
 /* signed-ness of char */
 _PDCLIB_static_assert( _PDCLIB_CHAR_MIN == ((((char) -1) < 0) ? _PDCLIB_SCHAR_MIN : 0), "Compiler disagrees on signed-ness of 'char'." );
 
@@ -780,6 +792,10 @@ _PDCLIB_static_assert( sizeof( void * ) == sizeof( _PDCLIB_uintptr_t ), "Compile
 
 /* ptrdiff_t as the result of pointer arithmetic */
 _PDCLIB_static_assert( sizeof( &_PDCLIB_digits[1] - &_PDCLIB_digits[0] ) == sizeof( _PDCLIB_ptrdiff_t ), "Compiler disagrees on ptrdiff_t." );
+
+#if _MSC_VER
+#pragma warning(default:4804)
+#endif
 
 #ifdef __cplusplus
 }

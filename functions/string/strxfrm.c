@@ -12,7 +12,7 @@
 
 size_t strxfrm( char * _PDCLIB_restrict s1, const char * _PDCLIB_restrict s2, size_t n )
 {
-    size_t len = strlen( s2 );
+    size_t len = strlen_( s2 );
 
     if ( len < n )
     {

@@ -11,7 +11,7 @@
 
 size_t strerrorlen_s( errno_t errnum )
 {
-    return strlen( strerror( errnum ) );
+    return strlen_( strerror( errnum ) );
 }
 
 #endif

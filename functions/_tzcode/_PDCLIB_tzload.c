@@ -97,7 +97,7 @@ static bool typesequiv( const struct state * sp, int a, int b )
                    ap->isdst == bp->isdst &&
                    ap->ttisstd == bp->ttisstd &&
                    ap->ttisut == bp->ttisut &&
-                   ( strcmp( &sp->chars[ ap->desigidx ], &sp->chars[ bp->desigidx ] ) == 0 )
+                   ( strcmp_( &sp->chars[ ap->desigidx ], &sp->chars[ bp->desigidx ] ) == 0 )
                  );
     }
 
@@ -204,7 +204,7 @@ static int tzloadbody( char const * name, struct state * sp, bool doextend, unio
     if ( ! doaccess )
     {
         char const * dot;
-        size_t namelen = strlen( name );
+        size_t namelen = strlen_( name );
 
         if ( sizeof lsp->fullname - sizeof tzdirslash <= namelen )
         {
@@ -215,8 +215,8 @@ static int tzloadbody( char const * name, struct state * sp, bool doextend, unio
            would pull in stdio (and would fail if the
            resulting string length exceeded INT_MAX!).
         */
-        memcpy( lsp->fullname, tzdirslash, sizeof tzdirslash );
-        strcpy( lsp->fullname + sizeof tzdirslash, name );
+        memcpy_( lsp->fullname, tzdirslash, sizeof tzdirslash );
+        strcpy_( lsp->fullname + sizeof tzdirslash, name );
 
         /* Set doaccess if NAME contains a ".." file name
            component, as such a name could read a file outside
@@ -473,7 +473,7 @@ static int tzloadbody( char const * name, struct state * sp, bool doextend, unio
         }
 
         nread -= p - up->buf;
-        memmove( up->buf, p, nread );
+        memmove_( up->buf, p, nread );
     }
 
     if ( doextend && nread > 2 && up->buf[ 0 ] == '\n' && up->buf[ nread - 1 ] == '\n' && sp->typecnt + 2 <= TZ_MAX_TYPES )
@@ -501,7 +501,7 @@ static int tzloadbody( char const * name, struct state * sp, bool doextend, unio
 
                 for ( j = 0; j < charcnt; ++j )
                 {
-                    if ( strcmp( sp->chars + j, tsabbr ) == 0 )
+                    if ( strcmp_( sp->chars + j, tsabbr ) == 0 )
                     {
                         ts->ttis[ i ].desigidx = j;
                         ++gotabbr;
@@ -511,11 +511,11 @@ static int tzloadbody( char const * name, struct state * sp, bool doextend, unio
 
                 if ( ! ( j < charcnt ) )
                 {
-                    int tsabbrlen = strlen( tsabbr );
+                    int tsabbrlen = strlen_( tsabbr );
 
                     if ( j + tsabbrlen < TZ_MAX_CHARS )
                     {
-                        strcpy( sp->chars + j, tsabbr );
+                        strcpy_( sp->chars + j, tsabbr );
                         charcnt = j + tsabbrlen + 1;
                         ts->ttis[ i ].desigidx = j;
                         ++gotabbr;
