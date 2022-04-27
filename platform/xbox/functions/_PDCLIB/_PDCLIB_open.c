@@ -9,7 +9,6 @@
 */
 
 #include <stdio.h>
-#include <assert.h>
 
 #ifndef REGTEST
 
@@ -23,9 +22,13 @@
 
 #include "/usr/include/errno.h"
 #endif
+
+// Defined in cxbxrkrnl
+extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+
 _PDCLIB_fd_t _PDCLIB_open( const char * const filename, unsigned int mode )
 {
-    _PDCLIB_assert89(__func__);
+    KeBugCheckEx(0xFFFF, (unsigned int)__func__, 0, 0, 0);
     return _PDCLIB_NOHANDLE;
 #if 0
     /* This is an example implementation of _PDCLIB_open() fit for use with

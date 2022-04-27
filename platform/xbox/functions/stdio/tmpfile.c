@@ -18,7 +18,7 @@ extern mtx_t _PDCLIB_filelist_mtx;
 
 #include <stdlib.h>
 #include <string.h>
-#include <assert.h>
+
 #if 0
 #include "sys/types.h"
 #include "sys/stat.h"
@@ -30,9 +30,13 @@ extern struct _PDCLIB_file_t * _PDCLIB_filelist;
 /* This is an example implementation of tmpfile() fit for use with POSIX
    kernels.
 */
+
+// Defined in cxbxrkrnl
+extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+
 struct _PDCLIB_file_t * tmpfile( void )
 {
-    _PDCLIB_assert89(__func__);
+    KeBugCheckEx(0xFFFF, (unsigned int)__func__, 0, 0, 0);
     return NULL;
 #if 0
     FILE * rc;

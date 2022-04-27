@@ -29,6 +29,7 @@ add_compile_options(
  /X
  /Zc:preprocessor
  /Za
+ /arch:IA32
 )
 
 file (GLOB HEADERS
@@ -277,6 +278,8 @@ file (GLOB SOURCES
  "functions/_PDCLIB/_PDCLIB_strtox_main.c"
  "functions/_PDCLIB/_PDCLIB_strtox_prelim.c"
  "functions/_PDCLIB/stdarg.c"
+
+ "functions/_dlmalloc/malloc.c"
 
  "platform/xbox/functions/_PDCLIB/_PDCLIB_changemode.c"
  "platform/xbox/functions/_PDCLIB/_PDCLIB_close.c"

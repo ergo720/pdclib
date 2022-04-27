@@ -9,7 +9,6 @@
 
 #include <string.h>
 #include <stdlib.h>
-#include <assert.h>
 
 #ifndef REGTEST
 
@@ -22,9 +21,13 @@ extern char ** environ;
    modify the environment list".
    PDCLib does not provide means of modifying the environment list.
 */
+
+// Defined in cxbxrkrnl
+extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+
 char * getenv( const char * name )
 {
-    _PDCLIB_assert89(__func__);
+    KeBugCheckEx(0xFFFF, (unsigned int)__func__, 0, 0, 0);
 #if 0
     size_t len = strlen_( name );
     size_t index = 0;

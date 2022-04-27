@@ -10,7 +10,6 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <assert.h>
 
 #ifndef REGTEST
 
@@ -36,9 +35,12 @@ extern ssize_t write( int fd, const void * buf, size_t count );
 /* trying again. (Empty by default.)                                          */
 #define _PDCLIB_IO_RETRY_OP( stream )
 
+// Defined in cxbxrkrnl
+extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+
 int _PDCLIB_flushbuffer( struct _PDCLIB_file_t * stream )
 {
-    _PDCLIB_assert89(__func__);
+    KeBugCheckEx(0xFFFF, (unsigned int)__func__, 0, 0, 0);
 #if 0
     /* No need to handle buffers > INT_MAX, as PDCLib doesn't allow them */
     _PDCLIB_size_t written = 0;

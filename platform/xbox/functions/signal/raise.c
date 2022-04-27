@@ -10,7 +10,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
 
 extern void ( *_PDCLIB_sigabrt )( int );
 extern void ( *_PDCLIB_sigfpe )( int );
@@ -19,9 +18,12 @@ extern void ( *_PDCLIB_sigint )( int );
 extern void ( *_PDCLIB_sigsegv )( int );
 extern void ( *_PDCLIB_sigterm )( int );
 
+// Defined in cxbxrkrnl
+extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+
 int raise( int sig )
 {
-    _PDCLIB_assert89(__func__);
+    KeBugCheckEx(0xFFFF, (unsigned int)__func__, 0, 0, 0);
     return -1;
 #if 0
     void ( *sighandler )( int );

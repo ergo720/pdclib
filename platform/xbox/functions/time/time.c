@@ -5,7 +5,6 @@
 */
 
 #include <time.h>
-#include <assert.h>
 
 #ifndef REGTEST
 
@@ -15,9 +14,12 @@
 
 /* See comments in _PDCLIB_config.h on the semantics of time_t. */
 
+// Defined in cxbxrkrnl
+extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+
 time_t time( time_t * timer )
 {
-    _PDCLIB_assert89(__func__);
+    KeBugCheckEx(0xFFFF, (unsigned int)__func__, 0, 0, 0);
 #if 0
     struct timeval tv;
 

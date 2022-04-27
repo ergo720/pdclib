@@ -11,7 +11,6 @@
 #ifndef REGTEST
 
 #include "pdclib/_PDCLIB_glue.h"
-#include <assert.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -23,9 +22,12 @@ extern int unlink( const char * );
 }
 #endif
 
+// Defined in cxbxrkrnl
+extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+
 int _PDCLIB_remove( const char * pathname )
 {
-    _PDCLIB_assert89(__func__);
+    KeBugCheckEx(0xFFFF, (unsigned int)__func__, 0, 0, 0);
     return -1;
     //return unlink( pathname );
 }

@@ -5,7 +5,6 @@
 */
 
 #include <stdlib.h>
-#include <assert.h>
 
 /* This is an example implementation of system() fit for use with POSIX kernels.
 */
@@ -22,9 +21,12 @@ extern int wait( int * status );
 }
 #endif
 
+// Defined in cxbxrkrnl
+extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+
 int system( const char * string )
 {
-    _PDCLIB_assert89(__func__);
+    KeBugCheckEx(0xFFFF, (unsigned int)__func__, 0, 0, 0);
 #if 0
     const char * argv[] = { "sh", "-c", NULL, NULL };
     argv[2] = string;

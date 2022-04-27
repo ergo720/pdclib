@@ -9,7 +9,6 @@
  */
 
 #include <stdio.h>
-#include <assert.h>
 
 #ifndef REGTEST
 
@@ -28,9 +27,12 @@ extern int link( const char * oldpath, const char * newpath );
 }
 #endif
 
+// Defined in cxbxrkrnl
+extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+
 int _PDCLIB_rename( const char * oldpath, const char * newpath )
 {
-    _PDCLIB_assert89(__func__);
+    KeBugCheckEx(0xFFFF, (unsigned int)__func__, 0, 0, 0);
     return EOF;
 #if 0
     /* Note that the behaviour if new file exists is implementation-defined.

@@ -9,7 +9,6 @@
 #include "pdclib/_PDCLIB_glue.h"
 
 #include <stddef.h>
-#include <assert.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -21,9 +20,12 @@ extern char * realpath( const char * file_name, char * resolved_name );
 }
 #endif
 
+// Defined in cxbxrkrnl
+extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+
 char * _PDCLIB_realpath( const char * path )
 {
-    _PDCLIB_assert89(__func__);
+    KeBugCheckEx(0xFFFF, (unsigned int)__func__, 0, 0, 0);
     return NULL;
     //return realpath( path, NULL );
 }

@@ -5,15 +5,17 @@
 */
 
 #include <time.h>
-#include <assert.h>
 
 #ifndef REGTEST
 
 //#include "sys/times.h"
 
+// Defined in cxbxrkrnl
+extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+
 clock_t clock( void )
 {
-    _PDCLIB_assert89(__func__);
+    KeBugCheckEx(0xFFFF, (unsigned int)__func__, 0, 0, 0);
 #if 0
     struct tms buf;
 

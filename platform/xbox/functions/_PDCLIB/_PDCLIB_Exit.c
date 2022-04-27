@@ -9,7 +9,6 @@
 */
 
 #include <stdlib.h>
-#include <assert.h>
 
 #ifndef REGTEST
 
@@ -25,9 +24,12 @@ extern _PDCLIB_Noreturn void _exit( int status );
 }
 #endif
 
+// Defined in cxbxrkrnl
+extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+
 void _PDCLIB_Exit( int status )
 {
-    _PDCLIB_assert89(__func__);
+    KeBugCheckEx(0xFFFF, (unsigned int)__func__, 0, 0, 0);
     //_exit( status );
 }
 

@@ -18,8 +18,6 @@ void * sbrk( intptr_t );
 
 #ifndef REGTEST
 
-#include "_PDCLIB_config.h"
-
 /* Have all functions herein use the dl* prefix */
 #define USE_DL_PREFIX 1
 
@@ -599,10 +597,9 @@ MAX_RELEASE_CHECK_RATE   default: 4095 unless not HAVE_MMAP
 #endif /* _WIN32_WCE */
 #endif  /* WIN32 */
 #ifdef WIN32
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#include <tchar.h>
-#define HAVE_MMAP 1
+#define NO_MALLOC_STATS 1
+#define NO_MALLINFO 1
+#define HAVE_MMAP 0
 #define HAVE_MORECORE 0
 #define LACKS_UNISTD_H
 #define LACKS_SYS_PARAM_H
@@ -610,8 +607,15 @@ MAX_RELEASE_CHECK_RATE   default: 4095 unless not HAVE_MMAP
 #define LACKS_STRING_H
 #define LACKS_STRINGS_H
 #define LACKS_SYS_TYPES_H
-#define LACKS_ERRNO_H
 #define LACKS_SCHED_H
+#define LACKS_FCNTL_H
+#include <assert.h>
+#ifndef LACKS_STDLIB_H
+#include <stdlib.h>      /* for size_t */
+#endif /* LACKS_STDLIB_H */
+#include <string.h>
+// Defined in cxbxrkrnl
+extern volatile unsigned int KeTickCount;
 #ifndef MALLOC_FAILURE_ACTION
 #define MALLOC_FAILURE_ACTION
 #endif /* MALLOC_FAILURE_ACTION */
@@ -1571,16 +1575,15 @@ extern void*     sbrk(ptrdiff_t);
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
-LONG __cdecl _InterlockedCompareExchange(LONG volatile *Dest, LONG Exchange, LONG Comp);
-LONG __cdecl _InterlockedExchange(LONG volatile *Target, LONG Value);
+// Defined in cxbxrkrnl
+extern int32_t __fastcall InterlockedCompareExchange(int32_t volatile *Dest, int32_t Exchange, int32_t Comp);
+extern int32_t __fastcall InterlockedExchange(int32_t volatile *Target, int32_t Value);
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
 #endif /* _M_AMD64 */
-#pragma intrinsic (_InterlockedCompareExchange)
-#pragma intrinsic (_InterlockedExchange)
-#define interlockedcompareexchange _InterlockedCompareExchange
-#define interlockedexchange _InterlockedExchange
+#define interlockedcompareexchange InterlockedCompareExchange
+#define interlockedexchange InterlockedExchange
 #elif defined(WIN32) && defined(__GNUC__)
 #define interlockedcompareexchange(a, b, c) __sync_val_compare_and_swap(a, c, b)
 #define interlockedexchange __sync_lock_test_and_set
@@ -1598,14 +1601,39 @@ LONG __cdecl _InterlockedExchange(LONG volatile *Target, LONG Value);
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
-unsigned char _BitScanForward(unsigned long *index, unsigned long mask);
-unsigned char _BitScanReverse(unsigned long *index, unsigned long mask);
+unsigned char BitScanForward
+(
+    unsigned long *index,
+    unsigned long mask
+)
+{
+    __asm {
+        mov eax, mask
+        bsf ecx, eax
+        mov edx, index
+        mov [edx], ecx
+    }
+}
+
+unsigned char BitScanReverse
+(
+    unsigned long *index,
+    unsigned long mask
+)
+{
+    __asm {
+        mov eax, mask
+        bsr ecx, eax
+        mov edx, index
+        mov [edx], ecx
+    }
+}
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
 
-#define BitScanForward _BitScanForward
-#define BitScanReverse _BitScanReverse
+#define BitScanForward BitScanForward
+#define BitScanReverse BitScanReverse
 #pragma intrinsic(_BitScanForward)
 #pragma intrinsic(_BitScanReverse)
 #endif /* BitScanForward */
@@ -1729,19 +1757,28 @@ static int dev_zero_fd = -1; /* Cached file descriptor for /dev/zero. */
 
 /* Win32 MMAP via VirtualAlloc */
 static FORCEINLINE void* win32mmap(size_t size) {
-  void* ptr = VirtualAlloc(0, size, MEM_RESERVE|MEM_COMMIT, PAGE_READWRITE);
-  return (ptr != 0)? ptr: MFAIL;
+  //void* ptr = VirtualAlloc(0, size, MEM_RESERVE|MEM_COMMIT, PAGE_READWRITE);
+  //return (ptr != 0)? ptr: MFAIL;
+  _PDCLIB_assert89(__func__);
+  return MFAIL;
 }
 
 /* For direct MMAP, use MEM_TOP_DOWN to minimize interference */
 static FORCEINLINE void* win32direct_mmap(size_t size) {
+#if 0
   void* ptr = VirtualAlloc(0, size, MEM_RESERVE|MEM_COMMIT|MEM_TOP_DOWN,
                            PAGE_READWRITE);
   return (ptr != 0)? ptr: MFAIL;
+#endif
+  _PDCLIB_assert89(__func__);
+  return MFAIL;
 }
 
 /* This function supports releasing coalesed segments */
 static FORCEINLINE int win32munmap(void* ptr, size_t size) {
+  _PDCLIB_assert89(__func__);
+  return -1;
+#if 0
   MEMORY_BASIC_INFORMATION minfo;
   char* cptr = (char*)ptr;
   while (size) {
@@ -1756,6 +1793,7 @@ static FORCEINLINE int win32munmap(void* ptr, size_t size) {
     size -= minfo.RegionSize;
   }
   return 0;
+#endif
 }
 
 #define MMAP_DEFAULT(s)             win32mmap(s)
@@ -1919,8 +1957,8 @@ static FORCEINLINE void x86_clear_lock(int* sl) {
 #define CLEAR_LOCK(sl)   x86_clear_lock(sl)
 
 #else /* Win32 MSC */
-#define CAS_LOCK(sl)     interlockedexchange(sl, (LONG)1)
-#define CLEAR_LOCK(sl)   interlockedexchange (sl, (LONG)0)
+#define CAS_LOCK(sl)     interlockedexchange(sl, (int32_t)1)
+#define CLEAR_LOCK(sl)   interlockedexchange (sl, (int32_t)0)
 
 #endif /* ... gcc spins locks ... */
 
@@ -1928,7 +1966,8 @@ static FORCEINLINE void x86_clear_lock(int* sl) {
 #define SPINS_PER_YIELD       63
 #if defined(_MSC_VER)
 #define SLEEP_EX_DURATION     50 /* delay for yield/sleep */
-#define SPIN_LOCK_YIELD  SleepEx(SLEEP_EX_DURATION, FALSE)
+//#define SPIN_LOCK_YIELD  SleepEx(SLEEP_EX_DURATION, FALSE)
+#define SPIN_LOCK_YIELD  _PDCLIB_assert89(__func__)
 #elif defined (__SVR4) && defined (__sun) /* solaris */
 #define SPIN_LOCK_YIELD   thr_yield();
 #elif !defined(LACKS_SCHED_H)
@@ -2933,7 +2972,7 @@ static size_t traverse_and_check(mstate m);
     I = NTREEBINS-1;\
   else {\
     unsigned int K;\
-    _BitScanReverse((DWORD *) &K, (DWORD) X);\
+    BitScanReverse((unsigned long *) &K, (unsigned long) X);\
     I =  (bindex_t)((K << 1) + ((S >> (K + (TREEBIN_SHIFT-1)) & 1)));\
   }\
 }
@@ -3018,7 +3057,7 @@ static size_t traverse_and_check(mstate m);
 #define compute_bit2idx(X, I)\
 {\
   unsigned int J;\
-  _BitScanForward((DWORD *) &J, X);\
+  BitScanForward((unsigned long *) &J, X);\
   I = (bindex_t)J;\
 }
 
@@ -3177,11 +3216,10 @@ static int init_mparams(void) {
     gsize = ((DEFAULT_GRANULARITY != 0)? DEFAULT_GRANULARITY : psize);
 #else /* WIN32 */
     {
-      SYSTEM_INFO system_info;
-      GetSystemInfo(&system_info);
-      psize = system_info.dwPageSize;
+      // Xbox uses 4K pages and has an allocation granularity of 64K
+      psize = 4 * 1024;
       gsize = ((DEFAULT_GRANULARITY != 0)?
-               DEFAULT_GRANULARITY : system_info.dwAllocationGranularity);
+               DEFAULT_GRANULARITY : 64 * 1024);
     }
 #endif /* WIN32 */
 
@@ -3232,7 +3270,7 @@ static int init_mparams(void) {
       else
 #endif /* USE_DEV_RANDOM */
 #ifdef WIN32
-      magic = (size_t)(GetTickCount() ^ (size_t)0x55555555U);
+      magic = (size_t)(KeTickCount ^ (size_t)0x55555555U);
 #elif defined(LACKS_TIME_H)
       magic = (size_t)&magic ^ (size_t)0x55555555U;
 #else
@@ -4860,7 +4898,7 @@ void* dlcalloc(size_t n_elements, size_t elem_size) {
   }
   mem = dlmalloc(req);
   if (mem != 0 && calloc_must_clear(mem2chunk(mem)))
-    memset(mem, 0, req);
+    memset_(mem, 0, req);
   return mem;
 }
 
@@ -5097,7 +5135,7 @@ static void** ialloc(mstate m,
   assert(!is_mmapped(p));
 
   if (opts & 0x2) {       /* optionally clear the elements */
-    memset((size_t*)mem, 0, remainder_size - SIZE_T_SIZE - array_size);
+    memset_((size_t*)mem, 0, remainder_size - SIZE_T_SIZE - array_size);
   }
 
   /* If not provided, allocate the pointer array as final part of chunk */
@@ -5279,7 +5317,7 @@ void* dlrealloc(void* oldmem, size_t bytes) {
         mem = internal_malloc(m, bytes);
         if (mem != 0) {
           size_t oc = chunksize(oldp) - overhead_for(oldp);
-          memcpy(mem, oldmem, (oc < bytes)? oc : bytes);
+          memcpy_(mem, oldmem, (oc < bytes)? oc : bytes);
           internal_free(m, oldmem);
         }
       }

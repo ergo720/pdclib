@@ -9,7 +9,6 @@
 #ifndef REGTEST
 
 #include <stdlib.h>
-#include <assert.h>
 
 void ( *_PDCLIB_sigabrt )( int ) = SIG_DFL;
 void ( *_PDCLIB_sigfpe )( int )  = SIG_DFL;
@@ -18,9 +17,12 @@ void ( *_PDCLIB_sigint )( int )  = SIG_DFL;
 void ( *_PDCLIB_sigsegv )( int ) = SIG_DFL;
 void ( *_PDCLIB_sigterm )( int ) = SIG_DFL;
 
+// Defined in cxbxrkrnl
+extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+
 void ( *signal( int sig, void ( *func )( int ) ) )( int )
 {
-    _PDCLIB_assert89(__func__);
+    KeBugCheckEx(0xFFFF, (unsigned int)__func__, 0, 0, 0);
     return SIG_ERR;
 #if 0
     void ( *oldhandler )( int );

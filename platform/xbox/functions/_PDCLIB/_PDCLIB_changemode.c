@@ -36,11 +36,13 @@
 
 #include <limits.h>
 #include <stddef.h>
-#include <assert.h>
+
+// Defined in cxbxrkrnl
+extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 int _PDCLIB_changemode( struct _PDCLIB_file_t * stream, unsigned int mode )
 {
-    _PDCLIB_assert89(__func__);
+    KeBugCheckEx(0xFFFF, (unsigned int)__func__, 0, 0, 0);
     return INT_MIN;
 #if 0
     if ( mode == 0 )
