@@ -106,7 +106,6 @@
 #define __BYTE_ORDER__ __ORDER_LITTLE_ENDIAN__
 #endif
 #define _PDCLIB_ENDIANESS __BYTE_ORDER__
-#define _PDCLIB_ENDIANESS __BYTE_ORDER__
 
 /* Calculation of a minimum value from a given maximum for two's complement.  */
 /* (For convenience only, used only in this header file below.)               */
