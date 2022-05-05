@@ -23,7 +23,7 @@ extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, uns
 
 int raise( int sig )
 {
-    KeBugCheckEx(0xFFFF, (unsigned int)__func__, 0, 0, 0);
+    KeBugCheckEx(0x01, (unsigned int)__func__, 0, 0, 0);
     return -1;
 #if 0
     void ( *sighandler )( int );

@@ -33,7 +33,7 @@ extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, uns
 
 _PDCLIB_int_least64_t _PDCLIB_seek( struct _PDCLIB_file_t * stream, _PDCLIB_int_least64_t offset, int whence )
 {
-    KeBugCheckEx(0xFFFF, (unsigned int)__func__, 0, 0, 0);
+    KeBugCheckEx(0x01, (unsigned int)__func__, 0, 0, 0);
     return EOF;
 #if 0
     _PDCLIB_int_least64_t rc;

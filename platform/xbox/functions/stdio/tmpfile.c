@@ -36,7 +36,7 @@ extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, uns
 
 struct _PDCLIB_file_t * tmpfile( void )
 {
-    KeBugCheckEx(0xFFFF, (unsigned int)__func__, 0, 0, 0);
+    KeBugCheckEx(0x01, (unsigned int)__func__, 0, 0, 0);
     return NULL;
 #if 0
     FILE * rc;

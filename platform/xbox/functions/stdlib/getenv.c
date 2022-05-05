@@ -27,7 +27,7 @@ extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, uns
 
 char * getenv( const char * name )
 {
-    KeBugCheckEx(0xFFFF, (unsigned int)__func__, 0, 0, 0);
+    KeBugCheckEx(0x01, (unsigned int)__func__, 0, 0, 0);
 #if 0
     size_t len = strlen_( name );
     size_t index = 0;

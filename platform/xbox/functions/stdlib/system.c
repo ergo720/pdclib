@@ -26,7 +26,7 @@ extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, uns
 
 int system( const char * string )
 {
-    KeBugCheckEx(0xFFFF, (unsigned int)__func__, 0, 0, 0);
+    KeBugCheckEx(0x01, (unsigned int)__func__, 0, 0, 0);
 #if 0
     const char * argv[] = { "sh", "-c", NULL, NULL };
     argv[2] = string;

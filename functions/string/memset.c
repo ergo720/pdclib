@@ -8,6 +8,9 @@
 
 #ifndef REGTEST
 
+// Disable global optimizations. This is necessary because here, msvc decides to replace this function with a call to its intrinsic version,
+// which can't work because of the /NODEFAULTLIB option and it will cause a linking error
+#pragma optimize("g", off)
 void * memset_( void * s, int c, size_t n )
 {
     unsigned char * p = ( unsigned char * ) s;
@@ -19,7 +22,7 @@ void * memset_( void * s, int c, size_t n )
 
     return s;
 }
-
+#pragma optimize("g", on)
 #endif
 
 #ifdef TEST

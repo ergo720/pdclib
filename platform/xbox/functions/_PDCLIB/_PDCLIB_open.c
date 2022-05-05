@@ -28,7 +28,7 @@ extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, uns
 
 _PDCLIB_fd_t _PDCLIB_open( const char * const filename, unsigned int mode )
 {
-    KeBugCheckEx(0xFFFF, (unsigned int)__func__, 0, 0, 0);
+    KeBugCheckEx(0x01, (unsigned int)__func__, 0, 0, 0);
     return _PDCLIB_NOHANDLE;
 #if 0
     /* This is an example implementation of _PDCLIB_open() fit for use with

@@ -32,7 +32,7 @@ extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, uns
 
 int _PDCLIB_fillbuffer( struct _PDCLIB_file_t * stream )
 {
-    KeBugCheckEx(0xFFFF, (unsigned int)__func__, 0, 0, 0);
+    KeBugCheckEx(0x01, (unsigned int)__func__, 0, 0, 0);
 #if 0
     /* No need to handle buffers > INT_MAX, as PDCLib doesn't allow them */
     ssize_t rc = read( stream->handle, stream->buffer, stream->bufsize );
