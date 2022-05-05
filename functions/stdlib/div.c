@@ -1,4 +1,4 @@
-/* div_( int, int )
+/* div( int, int )
 
    This file is part of the Public Domain C Library (PDCLib).
    Permission is granted to use, modify, and / or redistribute at will.
@@ -8,7 +8,7 @@
 
 #ifndef REGTEST
 
-div_t div_( int numer, int denom )
+div_t div( int numer, int denom )
 {
     div_t rc;
     rc.quot = numer / denom;
@@ -26,11 +26,11 @@ div_t div_( int numer, int denom )
 int main( void )
 {
     div_t result;
-    result = div_( 5, 2 );
+    result = div( 5, 2 );
     TESTCASE( result.quot == 2 && result.rem == 1 );
-    result = div_( -5, 2 );
+    result = div( -5, 2 );
     TESTCASE( result.quot == -2 && result.rem == -1 );
-    result = div_( 5, -2 );
+    result = div( 5, -2 );
     TESTCASE( result.quot == -2 && result.rem == 1 );
     TESTCASE( sizeof( result.quot ) == sizeof( int ) );
     TESTCASE( sizeof( result.rem )  == sizeof( int ) );

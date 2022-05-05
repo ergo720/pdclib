@@ -25,7 +25,7 @@ char * _PDCLIB_bigint_tostring( _PDCLIB_bigint_t const * _PDCLIB_restrict value,
         for ( i = value->size; i > 0; --i )
         {
             sprintf( buffer, "%s%0*" PRIxLEAST32, prefix, hexdigits, value->data[i - 1] );
-            buffer += hexdigits + strlen_( prefix );
+            buffer += hexdigits + strlen( prefix );
             prefix[0] = '.';
             prefix[1] = '\0';
         }
@@ -57,11 +57,11 @@ int main( void )
     char const * expected[] = { "0x00000000", "0x12345678", "0x90abcdef.12345678" };
 #endif
     _PDCLIB_bigint32( &value, 0 );
-    TESTCASE( strcmp_( _PDCLIB_bigint_tostring( &value, buffer ), expected[0] ) == 0 );
+    TESTCASE( strcmp( _PDCLIB_bigint_tostring( &value, buffer ), expected[0] ) == 0 );
     _PDCLIB_bigint32( &value, UINT32_C( 0x12345678 ) );
-    TESTCASE( strcmp_( _PDCLIB_bigint_tostring( &value, buffer ), expected[1] ) == 0 );
+    TESTCASE( strcmp( _PDCLIB_bigint_tostring( &value, buffer ), expected[1] ) == 0 );
     _PDCLIB_bigint64( &value, UINT32_C( 0x90abcdef ), UINT32_C( 0x12345678 ) );
-    TESTCASE( strcmp_( _PDCLIB_bigint_tostring( &value, buffer ), expected[2] ) == 0 );
+    TESTCASE( strcmp( _PDCLIB_bigint_tostring( &value, buffer ), expected[2] ) == 0 );
 #endif
     return TEST_RESULTS;
 }

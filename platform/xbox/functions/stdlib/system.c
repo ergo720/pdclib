@@ -66,7 +66,7 @@ int main( void )
     TESTCASE( system( SHELLCOMMAND ) );
     rewind( fh );
     TESTCASE( fread( buffer, 1, 24, fh ) == 24 );
-    TESTCASE( memcmp_( buffer, "SUCCESS testing system()", 24 ) == 0 );
+    TESTCASE( memcmp( buffer, "SUCCESS testing system()", 24 ) == 0 );
     TESTCASE( buffer[24] == 'x' );
     TESTCASE( fclose( fh ) == 0 );
     TESTCASE( remove( testfile ) == 0 );

@@ -402,7 +402,7 @@ typedef unsigned long long uint_fast64_t;
 #error Please create your own _PDCLIB_config.h. Using the existing one as-is will not work. (Unsupported *INTn_C macros.)
 #endif
 
-/* <stdlib.h> defines the div_() function family that allows taking quotient   */
+/* <stdlib.h> defines the div() function family that allows taking quotient   */
 /* and remainder of an integer division in one operation. Many platforms      */
 /* support this in hardware / opcode, and the standard permits ordering of    */
 /* the return structure in any way to fit the hardware. That is why those     */
@@ -484,7 +484,7 @@ struct _PDCLIB_lldiv_t
 #define _PDCLIB_UINTMAX_MAX  __UINTMAX_MAX__
 #define _PDCLIB_UINTMAX_C    __UINTMAX_C
 
-/* <inttypes.h> defines imaxdiv(), which is equivalent to the div_() function  */
+/* <inttypes.h> defines imaxdiv(), which is equivalent to the div() function  */
 /* family (see further above) with intmax_t as basis.                         */
 struct _PDCLIB_imaxdiv_t
 {

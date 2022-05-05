@@ -1,4 +1,4 @@
-/* llabs_( long int )
+/* llabs( long int )
 
    This file is part of the Public Domain C Library (PDCLib).
    Permission is granted to use, modify, and / or redistribute at will.
@@ -8,7 +8,7 @@
 
 #ifndef REGTEST
 
-long long int llabs_( long long int j )
+long long int llabs( long long int j )
 {
     return ( j >= 0 ) ? j : -j;
 }
@@ -23,9 +23,9 @@ long long int llabs_( long long int j )
 
 int main( void )
 {
-    TESTCASE( llabs_( 0ll ) == 0 );
-    TESTCASE( llabs_( LLONG_MAX ) == LLONG_MAX );
-    TESTCASE( llabs_( LLONG_MIN + 1 ) == -( LLONG_MIN + 1 ) );
+    TESTCASE( llabs( 0ll ) == 0 );
+    TESTCASE( llabs( LLONG_MAX ) == LLONG_MAX );
+    TESTCASE( llabs( LLONG_MIN + 1 ) == -( LLONG_MIN + 1 ) );
     return TEST_RESULTS;
 }
 

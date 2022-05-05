@@ -180,20 +180,20 @@ int main( void )
     char sorted1[] = { "bcehijmnopqrstvxyz" };
     char sorted2[] = { "bticjqnyozpvreshxm" };
     char s[19];
-    strcpy_( s, presort );
+    strcpy( s, presort );
     qsort_s( s, 18, 1, compare, NULL );
-    TESTCASE( strcmp_( s, sorted1 ) == 0 );
-    strcpy_( s, presort );
+    TESTCASE( strcmp( s, sorted1 ) == 0 );
+    strcpy( s, presort );
     qsort_s( s, 9, 2, compare, NULL );
-    TESTCASE( strcmp_( s, sorted2 ) == 0 );
-    strcpy_( s, presort );
+    TESTCASE( strcmp( s, sorted2 ) == 0 );
+    strcpy( s, presort );
     qsort_s( s, 1, 1, compare, NULL );
-    TESTCASE( strcmp_( s, presort ) == 0 );
+    TESTCASE( strcmp( s, presort ) == 0 );
 #if defined( REGTEST ) && ( defined( __BSD_VISIBLE ) || defined( __APPLE__ ) )
     puts( "qsort_s.c: Skipping test #4 for BSD as it goes into endless loop here." );
 #else
     qsort_s( s, 100, 0, compare, NULL );
-    TESTCASE( strcmp_( s, presort ) == 0 );
+    TESTCASE( strcmp( s, presort ) == 0 );
 #endif
 #endif
     return TEST_RESULTS;

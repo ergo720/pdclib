@@ -24,8 +24,8 @@ const char _PDCLIB_Xdigits[] = "0123456789ABCDEF";
 int main( void )
 {
 #ifndef REGTEST
-    TESTCASE( strcmp_( _PDCLIB_digits, "0123456789abcdefghijklmnopqrstuvwxyz" ) == 0 );
-    TESTCASE( strcmp_( _PDCLIB_Xdigits, "0123456789ABCDEF" ) == 0 );
+    TESTCASE( strcmp( _PDCLIB_digits, "0123456789abcdefghijklmnopqrstuvwxyz" ) == 0 );
+    TESTCASE( strcmp( _PDCLIB_Xdigits, "0123456789ABCDEF" ) == 0 );
 #endif
     return TEST_RESULTS;
 }

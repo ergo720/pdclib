@@ -94,7 +94,7 @@ size_t fwrite( const void * _PDCLIB_restrict ptr, size_t size, size_t nmemb, str
                 }
 
                 stream->bufidx = bufidx - offset;
-                memmove_( stream->buffer, stream->buffer + offset, stream->bufidx );
+                memmove( stream->buffer, stream->buffer + offset, stream->bufidx );
             }
     }
 

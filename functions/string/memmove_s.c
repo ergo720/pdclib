@@ -20,7 +20,7 @@ errno_t memmove_s( void * s1, rsize_t s1max, const void * s2, rsize_t n )
     {
         if ( s1 != NULL && s1max <= RSIZE_MAX )
         {
-            memset_( s1, 0, s1max );
+            memset( s1, 0, s1max );
         }
 
         _PDCLIB_constraint_handler( _PDCLIB_CONSTRAINT_VIOLATION( _PDCLIB_EINVAL ) );

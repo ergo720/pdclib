@@ -39,7 +39,7 @@ int remove( const char * pathname )
 
     while ( current != NULL )
     {
-        if ( ( current->filename != NULL ) && ( strcmp_( current->filename, pathname ) == 0 ) )
+        if ( ( current->filename != NULL ) && ( strcmp( current->filename, pathname ) == 0 ) )
         {
             return EOF;
         }

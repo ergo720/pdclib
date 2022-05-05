@@ -106,9 +106,9 @@ int main( void )
     TESTCASE( s[9] == '\0' );
 
     /* Overlapping */
-    TESTCASE( strcat_s( s, 7, s + 6 ) != 0 );
+    TESTCASE( strcats( s, 7, s + 6 ) != 0 );
     s[3] = '\0';
-    TESTCASE( strcat_s( s + 3, 4, s ) != 0 );
+    TESTCASE( strcats( s + 3, 4, s ) != 0 );
 
     TESTCASE( HANDLER_CALLS == 4 );
 #endif

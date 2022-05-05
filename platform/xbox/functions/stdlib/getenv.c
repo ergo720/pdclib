@@ -29,7 +29,7 @@ char * getenv( const char * name )
 {
     KeBugCheckEx(0x01, (unsigned int)__func__, 0, 0, 0);
 #if 0
-    size_t len = strlen_( name );
+    size_t len = strlen( name );
     size_t index = 0;
 
     while ( environ[ index ] != NULL )
@@ -53,8 +53,8 @@ char * getenv( const char * name )
 
 int main( void )
 {
-    TESTCASE( strcmp_( getenv( "SHELL" ), "/bin/bash" ) == 0 );
-    /* TESTCASE( strcmp_( getenv( "SHELL" ), "/bin/sh" ) == 0 ); */
+    TESTCASE( strcmp( getenv( "SHELL" ), "/bin/bash" ) == 0 );
+    /* TESTCASE( strcmp( getenv( "SHELL" ), "/bin/sh" ) == 0 ); */
     return TEST_RESULTS;
 }
 

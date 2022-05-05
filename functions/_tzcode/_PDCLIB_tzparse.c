@@ -745,13 +745,13 @@ bool _PDCLIB_tzparse( const char * name, struct state * sp, bool lastditch )
 
     sp->charcnt = charcnt;
     cp = sp->chars;
-    memcpy_( cp, stdname, stdlen );
+    memcpy( cp, stdname, stdlen );
     cp += stdlen;
     *cp++ = '\0';
 
     if ( dstlen != 0 )
     {
-        memcpy_( cp, dstname, dstlen );
+        memcpy( cp, dstname, dstlen );
         *( cp + dstlen ) = '\0';
     }
 

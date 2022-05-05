@@ -1,4 +1,4 @@
-/* strcpy_s( char *, rsize_t, const char * )
+/* strcpys( char *, rsize_t, const char * )
 
    This file is part of the Public Domain C Library (PDCLib).
    Permission is granted to use, modify, and / or redistribute at will.
@@ -11,7 +11,7 @@
 
 #ifndef REGTEST
 
-errno_t strcpy_s( char * _PDCLIB_restrict s1, rsize_t s1max, const char * _PDCLIB_restrict s2 )
+errno_t strcpys( char * _PDCLIB_restrict s1, rsize_t s1max, const char * _PDCLIB_restrict s2 )
 {
     char * dest = s1;
     const char * src = s2;
@@ -66,20 +66,20 @@ int main( void )
     char s[] = "xxxxx";
     set_constraint_handler_s( test_handler );
 
-    TESTCASE( strcpy_s( s, 6, "" ) == 0 );
+    TESTCASE( strcpys( s, 6, "" ) == 0 );
     TESTCASE( s[0] == '\0' );
     TESTCASE( s[1] == 'x' );
-    TESTCASE( strcpy_s( s, 6, abcde ) == 0 );
+    TESTCASE( strcpys( s, 6, abcde ) == 0 );
     TESTCASE( s[0] == 'a' );
     TESTCASE( s[4] == 'e' );
     TESTCASE( s[5] == '\0' );
 
     /* Overrun. */
-    TESTCASE( strcpy_s( s, 6, "abcdef" ) != 0 );
+    TESTCASE( strcpys( s, 6, "abcdef" ) != 0 );
 
     /* Overlapping. */
-    TESTCASE( strcpy_s( s, 3, s + 2 ) != 0 );
-    TESTCASE( strcpy_s( s + 2, 3, s ) != 0 );
+    TESTCASE( strcpys( s, 3, s + 2 ) != 0 );
+    TESTCASE( strcpys( s + 2, 3, s ) != 0 );
 
     TESTCASE( HANDLER_CALLS == 3 );
 #endif

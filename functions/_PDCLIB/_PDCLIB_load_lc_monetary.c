@@ -18,15 +18,15 @@ struct _PDCLIB_lc_lconv_monetary_t * _PDCLIB_load_lc_monetary( const char * path
 {
     struct _PDCLIB_lc_lconv_monetary_t * rc = NULL;
     const char * extension = "_monetary.dat";
-    char * file = (char *)malloc( strlen_( path ) + strlen_( locale ) + strlen_( extension ) + 1 );
+    char * file = (char *)malloc( strlen( path ) + strlen( locale ) + strlen( extension ) + 1 );
 
     if ( file )
     {
         FILE * fh;
 
-        strcpy_( file, path );
-        strcat_( file, locale );
-        strcat_( file, extension );
+        strcpy( file, path );
+        strcat( file, locale );
+        strcat( file, extension );
 
         if ( ( fh = fopen( file, "rb" ) ) != NULL )
         {
@@ -40,17 +40,17 @@ struct _PDCLIB_lc_lconv_monetary_t * _PDCLIB_load_lc_monetary( const char * path
                     if ( fread( buffer, 1, 14, fh ) == 14 )
                     {
                         rc->mon_decimal_point = data;
-                        data += strlen_( data ) + 1;
+                        data += strlen( data ) + 1;
                         rc->mon_thousands_sep = data;
-                        data += strlen_( data ) + 1;
+                        data += strlen( data ) + 1;
                         rc->mon_grouping = data;
-                        data += strlen_( data ) + 1;
+                        data += strlen( data ) + 1;
                         rc->positive_sign = data;
-                        data += strlen_( data ) + 1;
+                        data += strlen( data ) + 1;
                         rc->negative_sign = data;
-                        data += strlen_( data ) + 1;
+                        data += strlen( data ) + 1;
                         rc->currency_symbol = data;
-                        data += strlen_( data ) + 1;
+                        data += strlen( data ) + 1;
                         rc->int_curr_symbol = data;
 
                         rc->frac_digits = buffer[ 0 ];
@@ -128,13 +128,13 @@ int main( void )
     fclose( fh );
     TESTCASE( ( lc = _PDCLIB_load_lc_monetary( "./", "test" ) ) );
     remove( "test_monetary.dat" );
-    TESTCASE( strcmp_( lc->mon_decimal_point, "," ) == 0 );
-    TESTCASE( strcmp_( lc->mon_thousands_sep, "." ) == 0 );
-    TESTCASE( strcmp_( lc->mon_grouping, "3" ) == 0 );
-    TESTCASE( strcmp_( lc->positive_sign, "" ) == 0 );
-    TESTCASE( strcmp_( lc->negative_sign, "-" ) == 0 );
-    TESTCASE( strcmp_( lc->currency_symbol, "\xa4" ) == 0 );
-    TESTCASE( strcmp_( lc->int_curr_symbol, "EUR" ) == 0 );
+    TESTCASE( strcmp( lc->mon_decimal_point, "," ) == 0 );
+    TESTCASE( strcmp( lc->mon_thousands_sep, "." ) == 0 );
+    TESTCASE( strcmp( lc->mon_grouping, "3" ) == 0 );
+    TESTCASE( strcmp( lc->positive_sign, "" ) == 0 );
+    TESTCASE( strcmp( lc->negative_sign, "-" ) == 0 );
+    TESTCASE( strcmp( lc->currency_symbol, "\xa4" ) == 0 );
+    TESTCASE( strcmp( lc->int_curr_symbol, "EUR" ) == 0 );
 
     TESTCASE( lc->frac_digits == 2 );
     TESTCASE( lc->p_cs_precedes == 0 );

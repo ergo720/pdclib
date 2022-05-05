@@ -41,19 +41,19 @@ typedef _PDCLIB_size_t size_t;
    area pointed to by s1. If the two areas overlap, behaviour is undefined.
    Returns the value of s1.
 */
-_PDCLIB_PUBLIC void * memcpy_( void * _PDCLIB_restrict s1, const void * _PDCLIB_restrict s2, size_t n );
+_PDCLIB_PUBLIC void * memcpy( void * _PDCLIB_restrict s1, const void * _PDCLIB_restrict s2, size_t n );
 
 /* Copy a number of n characters from the memory area pointed to by s2 to the
    area pointed to by s1. The two areas may overlap.
    Returns the value of s1.
 */
-_PDCLIB_PUBLIC void * memmove_( void * _PDCLIB_restrict s1, const void * _PDCLIB_restrict s2, size_t n );
+_PDCLIB_PUBLIC void * memmove( void * _PDCLIB_restrict s1, const void * _PDCLIB_restrict s2, size_t n );
 
 /* Copy the character array s2 (including terminating '\0' byte) into the
    character array s1.
    Returns the value of s1.
 */
-_PDCLIB_PUBLIC char * strcpy_( char * _PDCLIB_restrict s1, const char * _PDCLIB_restrict s2 );
+_PDCLIB_PUBLIC char * strcpy( char * _PDCLIB_restrict s1, const char * _PDCLIB_restrict s2 );
 
 /* Copy a maximum of n characters from the character array s2 into the character
    array s1. If s2 is shorter than n characters, '\0' bytes will be appended to
@@ -71,7 +71,7 @@ _PDCLIB_PUBLIC char * strncpy( char * _PDCLIB_restrict s1, const char * _PDCLIB_
    the arrays overlap, behaviour is undefined.
    Returns the value of s1.
 */
-_PDCLIB_PUBLIC char * strcat_( char * _PDCLIB_restrict s1, const char * _PDCLIB_restrict s2 );
+_PDCLIB_PUBLIC char * strcat( char * _PDCLIB_restrict s1, const char * _PDCLIB_restrict s2 );
 
 /* Append a maximum of n characters from the character array s2 to the character
    array s1 (first character of s2 overwriting the '\0' of s1). A terminating
@@ -87,19 +87,19 @@ _PDCLIB_PUBLIC char * strncat( char * _PDCLIB_restrict s1, const char * _PDCLIB_
    Returns 0 if s1 == s2, a negative number if s1 < s2, and a positive number if
    s1 > s2.
 */
-_PDCLIB_PUBLIC int memcmp_( const void * s1, const void * s2, size_t n );
+_PDCLIB_PUBLIC int memcmp( const void * s1, const void * s2, size_t n );
 
 /* Compare the character arrays s1 and s2.
    Returns 0 if s1 == s2, a negative number if s1 < s2, and a positive number if
    s1 > s2.
 */
-_PDCLIB_PUBLIC int strcmp_( const char * s1, const char * s2 );
+_PDCLIB_PUBLIC int strcmp( const char * s1, const char * s2 );
 
 /* Compare the character arrays s1 and s2, interpreted as specified by the
    LC_COLLATE category of the current locale.
    Returns 0 if s1 == s2, a negative number if s1 < s2, and a positive number if
    s1 > s2.
-   TODO: Currently a dummy wrapper for strcmp_() as PDCLib does not yet support
+   TODO: Currently a dummy wrapper for strcmp() as PDCLib does not yet support
    locales.
 */
 _PDCLIB_PUBLIC int strcoll( const char * s1, const char * s2 );
@@ -124,7 +124,7 @@ _PDCLIB_PUBLIC size_t strxfrm( char * _PDCLIB_restrict s1, const char * _PDCLIB_
    character c (interpreted as unsigned char).
    Returns a pointer to the first instance found, or NULL.
 */
-_PDCLIB_PUBLIC void * memchr_( const void * s, int c, size_t n );
+_PDCLIB_PUBLIC void * memchr( const void * s, int c, size_t n );
 
 /* Search the character array s (including terminating '\0') for the character c
    (interpreted as char).
@@ -178,7 +178,7 @@ _PDCLIB_PUBLIC char * strtok( char * _PDCLIB_restrict s1, const char * _PDCLIB_r
    characters of the memory area pointed to by s.
    Returns s.
 */
-_PDCLIB_PUBLIC void * memset_( void * s, int c, size_t n );
+_PDCLIB_PUBLIC void * memset( void * s, int c, size_t n );
 
 /* Map an error number to a (locale-specific) error message string. Error
    numbers are typically errno values, but any number is mapped to a message.
@@ -188,7 +188,7 @@ _PDCLIB_PUBLIC char * strerror( int errnum );
 
 /* Returns the length of the string s (excluding terminating '\0').
 */
-_PDCLIB_PUBLIC size_t strlen_( const char * s );
+_PDCLIB_PUBLIC size_t strlen( const char * s );
 
 /* Annex K -- Bounds-checking interfaces */
 
@@ -246,7 +246,7 @@ _PDCLIB_PUBLIC errno_t memmove_s( void * _PDCLIB_restrict s1, rsize_t s1max, con
    The currently active constraint violation handler function will be called
    (see set_constraint_handler_s()).
 */
-_PDCLIB_PUBLIC errno_t strcpy_s( char * _PDCLIB_restrict s1, rsize_t s1max, const char * _PDCLIB_restrict s2 );
+_PDCLIB_PUBLIC errno_t strcpys( char * _PDCLIB_restrict s1, rsize_t s1max, const char * _PDCLIB_restrict s2 );
 
 /* Copy a maximum of n characters from the character array s2 into the character
    array s1. If s2 is longer than n, s1[n] will be set to '\0'.
@@ -290,7 +290,7 @@ _PDCLIB_PUBLIC errno_t strncpy_s( char * _PDCLIB_restrict s1, rsize_t s1max, con
    The currently active constraint violation handler function will be called
    (see set_constraint_handler_s()).
 */
-_PDCLIB_PUBLIC errno_t strcat_s( char * _PDCLIB_restrict s1, rsize_t s1max, const char * _PDCLIB_restrict s2 );
+_PDCLIB_PUBLIC errno_t strcats( char * _PDCLIB_restrict s1, rsize_t s1max, const char * _PDCLIB_restrict s2 );
 
 /* Append a maximum of n characters from the character array s2 to the
    character array s1 (first character of s2 overwriting the '\0' of s1). A
@@ -385,6 +385,12 @@ _PDCLIB_PUBLIC size_t strnlen_s( const char * s, size_t maxsize );
 
 #ifdef __cplusplus
 }
+#endif
+
+// Avoid using the intrinsic version of the library functions of msvc, but still allow optimizing the pdclib versions. This is necessary since we can't use
+// the intrinsic versions because of the /NODEFAULTLIB option and it will cause a linking error otherwise
+#ifdef _MSC_VER
+#pragma function(memcpy, memset, memcmp, memchr, memmove, strlen, strcmp, strcpy, strcat)
 #endif
 
 /* Extension hook for downstream projects that want to have non-standard

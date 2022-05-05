@@ -44,14 +44,14 @@ errno_t getenv_s( size_t * _PDCLIB_restrict len, char * _PDCLIB_restrict value, 
         return _PDCLIB_EINVAL;
     }
 
-    nlen = strlen_( name );
+    nlen = strlen( name );
 
     while ( environ[ index ] != NULL )
     {
         if ( strncmp( environ[ index ], name, nlen ) == 0 )
         {
             environ_value = environ[ index ] + nlen + 1;
-            vlen = strlen_( environ_value );
+            vlen = strlen( environ_value );
             rc = 0;
             break;
         }
@@ -66,7 +66,7 @@ errno_t getenv_s( size_t * _PDCLIB_restrict len, char * _PDCLIB_restrict value, 
 
     if ( vlen < maxsize )
     {
-        strcpy_( value, environ_value );
+        strcpy( value, environ_value );
     }
 
     return rc;
@@ -98,8 +98,8 @@ int main( void )
     set_constraint_handler_s( test_handler );
 
     TESTCASE( getenv_s( &len, value, 20, "SHELL" ) == 0 );
-    TESTCASE( strcmp_( value, "/bin/bash" ) == 0 );
-    /* TESTCASE( strcmp_( value, "/bin/sh" ) == 0 ); */
+    TESTCASE( strcmp( value, "/bin/bash" ) == 0 );
+    /* TESTCASE( strcmp( value, "/bin/sh" ) == 0 ); */
 
     /* constraint violations */
     TESTCASE( getenv_s( &len, NULL, 20, "SHELL" ) != 0 );

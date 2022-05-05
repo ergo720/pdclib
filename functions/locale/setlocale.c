@@ -44,7 +44,7 @@ char * setlocale( int category, const char * locale )
     /* All below is very much work-in-progress, so we do a dumb-dummy
        return here.
     */
-    if ( locale == NULL || ! strcmp_( locale, "C" ) )
+    if ( locale == NULL || ! strcmp( locale, "C" ) )
     {
         return ( char * )"C";
     }
@@ -82,7 +82,7 @@ char * setlocale( int category, const char * locale )
         /* TODO */
     }
 
-    if ( strlen_( locale ) == 0 )
+    if ( strlen( locale ) == 0 )
     {
         /* "" - Use default locale */
         locale = _PDCLIB_default_locale( category );
@@ -258,11 +258,11 @@ char * setlocale( int category, const char * locale )
 
 int main( void )
 {
-    TESTCASE( strcmp_( setlocale( LC_ALL, "C" ), "C" ) == 0 );
+    TESTCASE( strcmp( setlocale( LC_ALL, "C" ), "C" ) == 0 );
 #ifndef REGTEST
     TESTCASE( setlocale( LC_ALL, "" ) == NULL );
 #endif
-    TESTCASE( strcmp_( setlocale( LC_ALL, NULL ), "C" ) == 0 );
+    TESTCASE( strcmp( setlocale( LC_ALL, NULL ), "C" ) == 0 );
     return TEST_RESULTS;
 }
 

@@ -48,11 +48,11 @@ int main( void )
 
     t = -2147483648l;
     TESTCASE( ctime_s( s, 27, &t ) == 0 );
-    TESTCASE( strcmp_( s, "Fri Dec 13 21:45:52 1901\n" ) == 0 );
+    TESTCASE( strcmp( s, "Fri Dec 13 21:45:52 1901\n" ) == 0 );
 
     t = 2147483647l;
     TESTCASE( ctime_s( s, 27, &t ) == 0 );
-    TESTCASE( strcmp_( s, "Tue Jan 19 04:14:07 2038\n" ) == 0 );
+    TESTCASE( strcmp( s, "Tue Jan 19 04:14:07 2038\n" ) == 0 );
 #endif
 
     return TEST_RESULTS;

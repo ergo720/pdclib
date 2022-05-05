@@ -307,7 +307,6 @@ target_include_directories(pdclib BEFORE PRIVATE
 set_target_properties(pdclib PROPERTIES
  STATIC_LIBRARY_OPTIONS "
  /NODEFAULTLIB \
- /LTCG \
  "
 )
 
@@ -318,7 +317,6 @@ set(CMAKE_C_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} \
 
 set(CMAKE_C_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} \
  /O2 \
- /GL \
  /MT \
  "
 )

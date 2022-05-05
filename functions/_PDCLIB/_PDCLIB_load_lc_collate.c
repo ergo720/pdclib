@@ -17,15 +17,15 @@ struct _PDCLIB_lc_collate_t * _PDCLIB_load_lc_collate( const char * path, const 
 {
     struct _PDCLIB_lc_collate_t * rc = NULL;
     const char * extension = "_collate.dat";
-    char * file = (char *)malloc( strlen_( path ) + strlen_( locale ) + strlen_( extension ) + 1 );
+    char * file = (char *)malloc( strlen( path ) + strlen( locale ) + strlen( extension ) + 1 );
 
     if ( file )
     {
         FILE * fh;
 
-        strcpy_( file, path );
-        strcat_( file, locale );
-        strcat_( file, extension );
+        strcpy( file, path );
+        strcat( file, locale );
+        strcat( file, extension );
 
         if ( ( fh = fopen( file, "rb" ) ) != NULL )
         {

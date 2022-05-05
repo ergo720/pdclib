@@ -22,7 +22,7 @@ char * tmpnam( char * s )
         s = filename;
     }
 
-    strcpy_( s, file->filename );
+    strcpy( s, file->filename );
     fclose( file );
     return s;
 }
@@ -39,7 +39,7 @@ int main( void )
 {
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-    TESTCASE( strlen_( tmpnam( NULL ) ) < L_tmpnam );
+    TESTCASE( strlen( tmpnam( NULL ) ) < L_tmpnam );
 #pragma GCC diagnostic pop
     return TEST_RESULTS;
 }

@@ -25,7 +25,7 @@ void _PDCLIB_print_string( const char * s, struct _PDCLIB_status_t * status )
     {
         if ( status->prec < 0 )
         {
-            status->prec = strlen_( s );
+            status->prec = strlen( s );
         }
         else
         {

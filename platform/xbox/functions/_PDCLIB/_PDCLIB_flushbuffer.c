@@ -69,7 +69,7 @@ int _PDCLIB_flushbuffer( struct _PDCLIB_file_t * stream )
             stream->status |= _PDCLIB_ERRORFLAG;
             /* Move unwritten remains to begin of buffer. */
             stream->bufidx -= written;
-            memmove_( stream->buffer, stream->buffer + written, stream->bufidx );
+            memmove( stream->buffer, stream->buffer + written, stream->bufidx );
             return EOF;
         }
 
@@ -89,7 +89,7 @@ int _PDCLIB_flushbuffer( struct _PDCLIB_file_t * stream )
     stream->status |= _PDCLIB_ERRORFLAG;
     /* Move unwritten remains to begin of buffer. */
     stream->bufidx -= written;
-    memmove_( stream->buffer, stream->buffer + written, stream->bufidx );
+    memmove( stream->buffer, stream->buffer + written, stream->bufidx );
 #endif
     return EOF;
 }

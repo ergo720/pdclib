@@ -43,7 +43,7 @@ const char * _PDCLIB_strtox_prelim( const char * p, char * sign, int * base )
                We have to "rewind" the parsing; having the base set to 16 if it
                was zero previously does not hurt, as the result is zero anyway.
             */
-            if ( memchr_( _PDCLIB_digits, tolower( *p ), *base ) == NULL )
+            if ( memchr( _PDCLIB_digits, tolower( *p ), *base ) == NULL )
             {
                 p -= 2;
             }

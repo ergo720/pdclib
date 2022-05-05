@@ -109,7 +109,7 @@ static void _PDCLIB_print_hexa( int sign,
 
         for ( e = 1; exp > 0; ++e )
         {
-            div_t d = div_( exp, 10 );
+            div_t d = div( exp, 10 );
             exponent[e] = digit_chars[ d.rem ];
             exp = d.quot;
         }
@@ -276,7 +276,7 @@ void _PDCLIB_print_double( double value, struct _PDCLIB_status_t * status )
 {
     unsigned char bytes[ sizeof( double ) ];
     int exp;
-    memcpy_( bytes, &value, sizeof( double ) );
+    memcpy( bytes, &value, sizeof( double ) );
     exp = _PDCLIB_DBL_EXP( bytes ) - _PDCLIB_DBL_BIAS;
 
     if ( exp == _PDCLIB_DBL_MAX_EXP )
@@ -297,7 +297,7 @@ void _PDCLIB_print_ldouble( long double value, struct _PDCLIB_status_t * status 
 {
     unsigned char bytes[ sizeof( long double ) ];
     int exp;
-    memcpy_( bytes, &value, sizeof( long double ) );
+    memcpy( bytes, &value, sizeof( long double ) );
     exp = _PDCLIB_LDBL_EXP( bytes ) - _PDCLIB_LDBL_BIAS;
 
     if ( exp == _PDCLIB_LDBL_MAX_EXP )

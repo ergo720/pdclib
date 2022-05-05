@@ -118,7 +118,7 @@ _PDCLIB_PUBLIC void free( void * ptr );
 /* Resize a chunk of memory previously allocated with malloc() and pointed to
    by ptr to the given size (which might be larger or smaller than the original
    size). Returns a pointer to the reallocated memory, or NULL if the request
-   could not be satisfied. Note that the resizing might include a memcpy_()
+   could not be satisfied. Note that the resizing might include a memcpy()
    from the original location to a different one, so the return value might or
    might not equal ptr. If size is larger than the original size, the value of
    memory beyond the original size is undefined. If ptr is NULL, realloc()
@@ -230,13 +230,13 @@ _PDCLIB_PUBLIC void qsort( void * base, size_t nmemb, size_t size, int ( *compar
    complement's notation (most modern CPUs), the largest negative value cannot
    be represented as positive value. In this case, behaviour is unspecified.
 */
-_PDCLIB_PUBLIC int abs_( int j );
-_PDCLIB_PUBLIC long int labs_( long int j );
-_PDCLIB_PUBLIC long long int llabs_( long long int j );
+_PDCLIB_PUBLIC int abs( int j );
+_PDCLIB_PUBLIC long int labs( long int j );
+_PDCLIB_PUBLIC long long int llabs( long long int j );
 
 /* These structures each have a member quot and a member rem, of type int (for
    div_t), long int (for ldiv_t) and long long it (for lldiv_t) respectively.
-   The order of the members is platform-defined to allow the div_() functions
+   The order of the members is platform-defined to allow the div() functions
    below to be implemented efficiently.
 */
 typedef struct _PDCLIB_div_t     div_t;
@@ -246,9 +246,9 @@ typedef struct _PDCLIB_lldiv_t lldiv_t;
 /* Return quotient (quot) and remainder (rem) of an integer division in one of
    the structs above.
 */
-_PDCLIB_PUBLIC div_t div_( int numer, int denom );
-_PDCLIB_PUBLIC ldiv_t ldiv_( long int numer, long int denom );
-_PDCLIB_PUBLIC lldiv_t lldiv_( long long int numer, long long int denom );
+_PDCLIB_PUBLIC div_t div( int numer, int denom );
+_PDCLIB_PUBLIC ldiv_t ldiv( long int numer, long int denom );
+_PDCLIB_PUBLIC lldiv_t lldiv( long long int numer, long long int denom );
 
 /* TODO: Multibyte / wide character conversion functions */
 
@@ -370,6 +370,12 @@ _PDCLIB_PUBLIC errno_t qsort_s( void * base, rsize_t nmemb, rsize_t size, int ( 
 
 #ifdef __cplusplus
 }
+#endif
+
+// Avoid using the intrinsic version of the library functions of msvc, but still allow optimizing the pdclib version. This is necessary since we can't use
+// the intrinsic versions because of the /NODEFAULTLIB option and it will cause a linking error otherwise
+#ifdef _MSC_VER
+#pragma function(div, ldiv, lldiv, abs, labs, llabs)
 #endif
 
 /* Extension hook for downstream projects that want to have non-standard

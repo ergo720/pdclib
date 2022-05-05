@@ -1,4 +1,4 @@
-/* strcat_s( char *, rsize_t, const char * )
+/* strcats( char *, rsize_t, const char * )
 
    This file is part of the Public Domain C Library (PDCLib).
    Permission is granted to use, modify, and / or redistribute at will.
@@ -11,7 +11,7 @@
 
 #ifndef REGTEST
 
-errno_t strcat_s( char * _PDCLIB_restrict s1, rsize_t s1max, const char * _PDCLIB_restrict s2 )
+errno_t strcats( char * _PDCLIB_restrict s1, rsize_t s1max, const char * _PDCLIB_restrict s2 )
 {
     char * dest = s1;
     const char * src = s2;
@@ -71,29 +71,29 @@ int main( void )
     char s[] = "xx\0xxxxxx";
     set_constraint_handler_s( test_handler );
 
-    TESTCASE( strcat_s( s, 10, abcde ) == 0 );
+    TESTCASE( strcats( s, 10, abcde ) == 0 );
     TESTCASE( s[2] == 'a' );
     TESTCASE( s[6] == 'e' );
     TESTCASE( s[7] == '\0' );
     TESTCASE( s[8] == 'x' );
     s[0] = '\0';
-    TESTCASE( strcat_s( s, 10, abcdx ) == 0 );
+    TESTCASE( strcats( s, 10, abcdx ) == 0 );
     TESTCASE( s[4] == 'x' );
     TESTCASE( s[5] == '\0' );
-    TESTCASE( strcat_s( s, 10, "\0" ) == 0 );
+    TESTCASE( strcats( s, 10, "\0" ) == 0 );
     TESTCASE( s[5] == '\0' );
     TESTCASE( s[6] == 'e' );
 
-    TESTCASE( strcat_s( s, 6, "" ) == 0 );
-    TESTCASE( strcat_s( s, 5, "" ) != 0 );
-    TESTCASE( strcat_s( s, 7, "x" ) == 0 );
+    TESTCASE( strcats( s, 6, "" ) == 0 );
+    TESTCASE( strcats( s, 5, "" ) != 0 );
+    TESTCASE( strcats( s, 7, "x" ) == 0 );
     TESTCASE( s[5] == 'x' );
     TESTCASE( s[6] == '\0' );
 
     /* Overlapping */
-    TESTCASE( strcat_s( s, 7, s + 6 ) != 0 );
+    TESTCASE( strcats( s, 7, s + 6 ) != 0 );
     s[3] = '\0';
-    TESTCASE( strcat_s( s + 3, 4, s ) != 0 );
+    TESTCASE( strcats( s + 3, 4, s ) != 0 );
 
     TESTCASE( HANDLER_CALLS == 3 );
 #endif

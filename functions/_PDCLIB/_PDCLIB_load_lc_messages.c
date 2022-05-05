@@ -17,15 +17,15 @@ struct _PDCLIB_lc_messages_t * _PDCLIB_load_lc_messages( const char * path, cons
 {
     struct _PDCLIB_lc_messages_t * rc = NULL;
     const char * extension = "_messages.dat";
-    char * file = (char *)malloc( strlen_( path ) + strlen_( locale ) + strlen_( extension ) + 1 );
+    char * file = (char *)malloc( strlen( path ) + strlen( locale ) + strlen( extension ) + 1 );
 
     if ( file )
     {
         FILE * fh;
 
-        strcpy_( file, path );
-        strcat_( file, locale );
-        strcat_( file, extension );
+        strcpy( file, path );
+        strcat( file, locale );
+        strcat( file, extension );
 
         if ( ( fh = fopen( file, "rb" ) ) != NULL )
         {
@@ -40,7 +40,7 @@ struct _PDCLIB_lc_messages_t * _PDCLIB_load_lc_messages( const char * path, cons
                     for ( i = 0; i < _PDCLIB_ERRNO_MAX; ++i )
                     {
                         rc->errno_texts[ i ] = data;
-                        data += strlen_( data ) + 1;
+                        data += strlen( data ) + 1;
                     }
 
                     rc->alloced = 1;
@@ -77,9 +77,9 @@ int main( void )
     fclose( fh );
     TESTCASE( ( lc = _PDCLIB_load_lc_numeric( "./", "test" ) ) );
     remove( "test_numeric.dat" );
-    TESTCASE( strcmp_( lc->decimal_point, "," ) == 0 );
-    TESTCASE( strcmp_( lc->thousands_sep, "." ) == 0 );
-    TESTCASE( strcmp_( lc->grouping, "" ) == 0 );
+    TESTCASE( strcmp( lc->decimal_point, "," ) == 0 );
+    TESTCASE( strcmp( lc->thousands_sep, "." ) == 0 );
+    TESTCASE( strcmp( lc->grouping, "" ) == 0 );
 #endif
 
     return TEST_RESULTS;

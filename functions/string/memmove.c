@@ -1,4 +1,4 @@
-/* memmove_( void *, const void *, size_t )
+/* memmove( void *, const void *, size_t )
 
    This file is part of the Public Domain C Library (PDCLib).
    Permission is granted to use, modify, and / or redistribute at will.
@@ -8,7 +8,7 @@
 
 #ifndef REGTEST
 
-void * memmove_( void * s1, const void * s2, size_t n )
+void * memmove( void * s1, const void * s2, size_t n )
 {
     char * dest = ( char * ) s1;
     const char * src = ( const char * ) s2;
@@ -43,11 +43,11 @@ void * memmove_( void * s1, const void * s2, size_t n )
 int main( void )
 {
     char s[] = "xxxxabcde";
-    TESTCASE( memmove_( s, s + 4, 5 ) == s );
+    TESTCASE( memmove( s, s + 4, 5 ) == s );
     TESTCASE( s[0] == 'a' );
     TESTCASE( s[4] == 'e' );
     TESTCASE( s[5] == 'b' );
-    TESTCASE( memmove_( s + 4, s, 5 ) == s + 4 );
+    TESTCASE( memmove( s + 4, s, 5 ) == s + 4 );
     TESTCASE( s[4] == 'a' );
     return TEST_RESULTS;
 }

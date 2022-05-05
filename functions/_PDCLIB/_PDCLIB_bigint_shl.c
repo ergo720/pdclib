@@ -26,8 +26,8 @@ _PDCLIB_bigint_t * _PDCLIB_bigint_shl( _PDCLIB_bigint_t * lhs, unsigned rhs )
 
     if ( word_shifts > 0 )
     {
-        memmove_( lhs->data + word_shifts, lhs->data, sizeof( _PDCLIB_bigint_digit_t ) * lhs->size );
-        memset_( lhs->data, 0, sizeof( _PDCLIB_bigint_digit_t ) * word_shifts );
+        memmove( lhs->data + word_shifts, lhs->data, sizeof( _PDCLIB_bigint_digit_t ) * lhs->size );
+        memset( lhs->data, 0, sizeof( _PDCLIB_bigint_digit_t ) * word_shifts );
         lhs->size += word_shifts;
     }
 

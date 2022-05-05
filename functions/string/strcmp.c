@@ -1,4 +1,4 @@
-/* strcmp_( const char *, const char * )
+/* strcmp( const char *, const char * )
 
    This file is part of the Public Domain C Library (PDCLib).
    Permission is granted to use, modify, and / or redistribute at will.
@@ -8,7 +8,7 @@
 
 #ifndef REGTEST
 
-int strcmp_( const char * s1, const char * s2 )
+int strcmp( const char * s1, const char * s2 )
 {
     while ( ( *s1 ) && ( *s1 == *s2 ) )
     {
@@ -30,12 +30,12 @@ int main( void )
     char cmpabcde[] = "abcde";
     char cmpabcd_[] = "abcd\xfc";
     char empty[] = "";
-    TESTCASE( strcmp_( abcde, cmpabcde ) == 0 );
-    TESTCASE( strcmp_( abcde, abcdx ) < 0 );
-    TESTCASE( strcmp_( abcdx, abcde ) > 0 );
-    TESTCASE( strcmp_( empty, abcde ) < 0 );
-    TESTCASE( strcmp_( abcde, empty ) > 0 );
-    TESTCASE( strcmp_( abcde, cmpabcd_ ) < 0 );
+    TESTCASE( strcmp( abcde, cmpabcde ) == 0 );
+    TESTCASE( strcmp( abcde, abcdx ) < 0 );
+    TESTCASE( strcmp( abcdx, abcde ) > 0 );
+    TESTCASE( strcmp( empty, abcde ) < 0 );
+    TESTCASE( strcmp( abcde, empty ) > 0 );
+    TESTCASE( strcmp( abcde, cmpabcd_ ) < 0 );
     return TEST_RESULTS;
 }
 

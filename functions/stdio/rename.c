@@ -28,7 +28,7 @@ int rename( const char * oldpath, const char * newpath )
 
         while ( current != NULL )
         {
-            if ( ( current->filename != NULL ) && ( strcmp_( current->filename, oldpath ) == 0 ) )
+            if ( ( current->filename != NULL ) && ( strcmp( current->filename, oldpath ) == 0 ) )
             {
                 /* File of that name currently open. Do not rename. */
                 _PDCLIB_UNLOCK( _PDCLIB_filelist_mtx );
