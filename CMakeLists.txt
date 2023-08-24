@@ -2,8 +2,6 @@ cmake_minimum_required(VERSION 3.1.3 FATAL_ERROR)
 
 project(pdclib)
 
-set(CMAKE_SUPPRESS_REGENERATION true)
-
 set(CMAKE_C_STANDARD_LIBRARIES "")
 foreach(flag_var
     CMAKE_C_FLAGS CMAKE_C_FLAGS_DEBUG CMAKE_C_FLAGS_RELEASE
@@ -29,7 +27,7 @@ add_compile_options(
  /X
  /Zc:preprocessor
  /Za
- /arch:IA32
+ /arch:SSE
 )
 
 file (GLOB HEADERS
