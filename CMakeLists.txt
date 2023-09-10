@@ -31,7 +31,6 @@ add_compile_options(
 )
 
 file (GLOB HEADERS
- "include/assert.h"
  "include/ctype.h"
  "include/errno.h"
  "include/inttypes.h"
@@ -50,6 +49,7 @@ file (GLOB HEADERS
  "include/time.h"
  "include/wctype.h"
 
+ "platform/xbox/include/assert.h"
  "platform/xbox/include/float.h"
  "platform/xbox/include/signal.h"
 
@@ -228,7 +228,6 @@ file (GLOB SOURCES
  "functions/_tzcode/_PDCLIB_tzset_unlocked.c"
  "functions/_tzcode/_PDCLIB_update_tzname_etc.c"
 
- "functions/_PDCLIB/assert.c"
  "functions/_PDCLIB/errno.c"
  "functions/_PDCLIB/_PDCLIB_atomax.c"
  "functions/_PDCLIB/_PDCLIB_bigint.c"
@@ -279,6 +278,7 @@ file (GLOB SOURCES
 
  "functions/_dlmalloc/malloc.c"
 
+ "platform/xbox/functions/_PDCLIB/assert.c"
  "platform/xbox/functions/_PDCLIB/_PDCLIB_changemode.c"
  "platform/xbox/functions/_PDCLIB/_PDCLIB_close.c"
  "platform/xbox/functions/_PDCLIB/_PDCLIB_Exit.c"
