@@ -31,7 +31,7 @@ extern int unlink( const char * pathname );
 
 int remove( const char * pathname )
 {
-    _PDCLIB_assert89(__func__);
+    assert(__func__);
     return EOF;
 #if 0
     int rc;

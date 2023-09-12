@@ -1967,7 +1967,7 @@ static FORCEINLINE void x86_clear_lock(int* sl) {
 #if defined(_MSC_VER)
 #define SLEEP_EX_DURATION     50 /* delay for yield/sleep */
 //#define SPIN_LOCK_YIELD  SleepEx(SLEEP_EX_DURATION, FALSE)
-#define SPIN_LOCK_YIELD  _PDCLIB_assert89(__func__)
+#define SPIN_LOCK_YIELD  assert(__func__)
 #elif defined (__SVR4) && defined (__sun) /* solaris */
 #define SPIN_LOCK_YIELD   thr_yield();
 #elif !defined(LACKS_SCHED_H)
