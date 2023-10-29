@@ -614,7 +614,7 @@ MAX_RELEASE_CHECK_RATE   default: 4095 unless not HAVE_MMAP
 #include <stdlib.h>      /* for size_t */
 #endif /* LACKS_STDLIB_H */
 #include <string.h>
-// Defined in cxbxrkrnl
+// Defined in nboxkrnl
 extern volatile unsigned int KeTickCount;
 #ifndef MALLOC_FAILURE_ACTION
 #define MALLOC_FAILURE_ACTION
@@ -1575,7 +1575,7 @@ extern void*     sbrk(ptrdiff_t);
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
-// Defined in cxbxrkrnl
+// Defined in nboxkrnl
 extern int32_t __fastcall InterlockedCompareExchange(int32_t volatile *Dest, int32_t Exchange, int32_t Comp);
 extern int32_t __fastcall InterlockedExchange(int32_t volatile *Target, int32_t Value);
 #ifdef __cplusplus

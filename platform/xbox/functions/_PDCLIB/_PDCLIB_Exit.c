@@ -24,7 +24,7 @@ extern _PDCLIB_Noreturn void _exit( int status );
 }
 #endif
 
-// Defined in cxbxrkrnl
+// Defined in nboxkrnl
 extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 void _PDCLIB_Exit( int status )

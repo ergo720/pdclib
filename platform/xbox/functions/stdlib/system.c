@@ -21,7 +21,7 @@ extern int wait( int * status );
 }
 #endif
 
-// Defined in cxbxrkrnl
+// Defined in nboxkrnl
 extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 int system( const char * string )

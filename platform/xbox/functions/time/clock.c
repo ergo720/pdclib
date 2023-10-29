@@ -10,7 +10,7 @@
 
 //#include "sys/times.h"
 
-// Defined in cxbxrkrnl
+// Defined in nboxkrnl
 extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 clock_t clock( void )

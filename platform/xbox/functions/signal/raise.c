@@ -18,7 +18,7 @@ extern void ( *_PDCLIB_sigint )( int );
 extern void ( *_PDCLIB_sigsegv )( int );
 extern void ( *_PDCLIB_sigterm )( int );
 
-// Defined in cxbxrkrnl
+// Defined in nboxkrnl
 extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 int raise( int sig )

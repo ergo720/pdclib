@@ -22,7 +22,7 @@ extern char ** environ;
    PDCLib does not provide means of modifying the environment list.
 */
 
-// Defined in cxbxrkrnl
+// Defined in nboxkrnl
 extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 char * getenv( const char * name )

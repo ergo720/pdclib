@@ -22,7 +22,7 @@ extern int unlink( const char * );
 }
 #endif
 
-// Defined in cxbxrkrnl
+// Defined in nboxkrnl
 extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 int _PDCLIB_remove( const char * pathname )

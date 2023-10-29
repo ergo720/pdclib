@@ -31,7 +31,7 @@ extern struct _PDCLIB_file_t * _PDCLIB_filelist;
    kernels.
 */
 
-// Defined in cxbxrkrnl
+// Defined in nboxkrnl
 extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 struct _PDCLIB_file_t * tmpfile( void )

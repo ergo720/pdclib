@@ -27,7 +27,7 @@ extern int link( const char * oldpath, const char * newpath );
 }
 #endif
 
-// Defined in cxbxrkrnl
+// Defined in nboxkrnl
 extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 int _PDCLIB_rename( const char * oldpath, const char * newpath )

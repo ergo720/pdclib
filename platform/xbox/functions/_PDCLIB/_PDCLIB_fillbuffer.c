@@ -27,7 +27,7 @@ extern ssize_t read( int fd, void * buf, size_t count );
 }
 #endif
 
-// Defined in cxbxrkrnl
+// Defined in nboxkrnl
 extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 int _PDCLIB_fillbuffer( struct _PDCLIB_file_t * stream )

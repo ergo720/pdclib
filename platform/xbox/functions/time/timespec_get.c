@@ -12,7 +12,7 @@
 
 //#include "sys/time.h"
 
-// Defined in cxbxrkrnl
+// Defined in nboxkrnl
 extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 int timespec_get( struct timespec * ts, int base )

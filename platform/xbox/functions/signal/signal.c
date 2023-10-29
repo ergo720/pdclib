@@ -17,7 +17,7 @@ void ( *_PDCLIB_sigint )( int )  = SIG_DFL;
 void ( *_PDCLIB_sigsegv )( int ) = SIG_DFL;
 void ( *_PDCLIB_sigterm )( int ) = SIG_DFL;
 
-// Defined in cxbxrkrnl
+// Defined in nboxkrnl
 extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 void ( *signal( int sig, void ( *func )( int ) ) )( int )

@@ -35,7 +35,7 @@ extern ssize_t write( int fd, const void * buf, size_t count );
 /* trying again. (Empty by default.)                                          */
 #define _PDCLIB_IO_RETRY_OP( stream )
 
-// Defined in cxbxrkrnl
+// Defined in nboxkrnl
 extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 int _PDCLIB_flushbuffer( struct _PDCLIB_file_t * stream )

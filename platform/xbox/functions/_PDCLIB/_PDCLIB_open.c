@@ -23,7 +23,7 @@
 #include "/usr/include/errno.h"
 #endif
 
-// Defined in cxbxrkrnl
+// Defined in nboxkrnl
 extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 _PDCLIB_fd_t _PDCLIB_open( const char * const filename, unsigned int mode )

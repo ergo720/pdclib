@@ -14,7 +14,7 @@
 
 /* See comments in _PDCLIB_config.h on the semantics of time_t. */
 
-// Defined in cxbxrkrnl
+// Defined in nboxkrnl
 extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 time_t time( time_t * timer )

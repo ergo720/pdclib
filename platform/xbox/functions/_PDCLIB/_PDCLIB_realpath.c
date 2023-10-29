@@ -20,7 +20,7 @@ extern char * realpath( const char * file_name, char * resolved_name );
 }
 #endif
 
-// Defined in cxbxrkrnl
+// Defined in nboxkrnl
 extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 char * _PDCLIB_realpath( const char * path )

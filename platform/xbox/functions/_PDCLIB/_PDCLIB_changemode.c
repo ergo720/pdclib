@@ -37,7 +37,7 @@
 #include <limits.h>
 #include <stddef.h>
 
-// Defined in cxbxrkrnl
+// Defined in nboxkrnl
 extern void __stdcall KeBugCheckEx(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 int _PDCLIB_changemode( struct _PDCLIB_file_t * stream, unsigned int mode )
